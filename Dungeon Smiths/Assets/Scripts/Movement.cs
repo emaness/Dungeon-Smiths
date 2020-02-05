@@ -66,6 +66,8 @@ public class Movement : MonoBehaviour
         if(other.gameObject.CompareTag("FireObstacle"))
         {
             Destroy(other.gameObject);
+            moveStick.Reset();
+            camStick.Reset();
 
             foreach(GameObject obj in gameObject.scene.GetRootGameObjects())
             {
@@ -76,6 +78,8 @@ public class Movement : MonoBehaviour
         } else if(other.gameObject.CompareTag("TileMatchingCube"))
         {
             Destroy(other.gameObject);
+            moveStick.Reset();
+            camStick.Reset();
 
             foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
             {
