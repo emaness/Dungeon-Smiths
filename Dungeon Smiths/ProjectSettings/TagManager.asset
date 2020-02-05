@@ -9,6 +9,7 @@ TagManager:
   - FireObstacle
   - Hose
   - WaterDroplet
+  - TileMatchingCube
   layers:
   - Default
   - TransparentFX

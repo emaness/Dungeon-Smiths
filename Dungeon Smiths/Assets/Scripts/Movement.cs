@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
 
         if (moveStick.Horizontal != 0 || moveStick.Vertical != 0)
         {
-            transform.Translate(-moveStick.Horizontal, 0, -moveStick.Vertical);
+            transform.Translate(-moveStick.Horizontal * 0.1f, 0, -moveStick.Vertical * 0.1f);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         }
         if (camStick.Horizontal != 0 || camStick.Vertical != 0)
@@ -73,6 +73,16 @@ public class Movement : MonoBehaviour
             }
 
             SceneManager.LoadScene("FireGame", LoadSceneMode.Additive);
+        } else if(other.gameObject.CompareTag("TileMatchingCube"))
+        {
+            Destroy(other.gameObject);
+
+            foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
+            {
+                obj.SetActive(false);
+            }
+
+            SceneManager.LoadScene("TileMatchingGame", LoadSceneMode.Additive);
         }
     }
 }
