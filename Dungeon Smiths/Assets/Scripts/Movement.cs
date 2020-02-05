@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -57,6 +58,21 @@ public class Movement : MonoBehaviour
             transform.Rotate(0, camStick.Horizontal, 0);
             cam.transform.Rotate(0, camStick.Horizontal, 0);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("FireObstacle"))
+        {
+            Destroy(other.gameObject);
+
+            foreach(GameObject obj in gameObject.scene.GetRootGameObjects())
+            {
+                obj.SetActive(false);
+            }
+
+            SceneManager.LoadScene("FireGame", LoadSceneMode.Additive);
         }
     }
 }
