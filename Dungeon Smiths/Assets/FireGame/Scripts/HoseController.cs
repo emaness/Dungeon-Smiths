@@ -97,6 +97,14 @@ public class HoseController : MonoBehaviour
                 // shoot water
                 if(dropletTimeout < 0.01f)
                 {
+                    // Play hose noise
+                    if (GetComponent<AudioSource>().isPlaying == false)
+                    {
+                        GetComponent<AudioSource>().volume = Random.Range(0.6f, .8f);
+                        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1);
+                        GetComponent<AudioSource>().Play();
+                    }
+
                     Vector3 p = gameObject.transform.TransformPoint(waterSpawnPoint.transform.localPosition + new Vector3(0, Random.Range(-0.25f, 0.25f)));
                     GameObject droplet = Instantiate(waterDroplet, p, Quaternion.identity);
                     Vector3 dir = p - gameObject.transform.position;
@@ -105,6 +113,10 @@ public class HoseController : MonoBehaviour
                     rb.velocity = dir * 3.0f;
                     dropletTimeout = 1.0f / dropletsPerSecond;
                 }
+            }
+            else
+            {
+                GetComponent<AudioSource>().Stop();
             }
         }
     }

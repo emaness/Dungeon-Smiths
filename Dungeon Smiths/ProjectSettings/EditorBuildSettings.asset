@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MovementTest.unity
+    path: Assets/Scenes/Level1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/FireGame/Scenes/FireGame.unity
@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tile Matching/Scenes/TileMatchingGame.unity
     guid: 6617b440655ee714e818e6b8c70d975f
+  - enabled: 1
+    path: Assets/AngryRocks/Scenes/AngryRocks.unity
+    guid: ceaae7e6396b1451b977e6281be6eae1
+  - enabled: 1
+    path: Assets/webEscape/Scenes/spiderScene.unity
+    guid: 43fa043824bbfaa4cb9a597ea757c1f8
   m_configObjects: {}

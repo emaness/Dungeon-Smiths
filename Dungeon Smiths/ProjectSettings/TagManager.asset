@@ -10,6 +10,9 @@ TagManager:
   - Hose
   - WaterDroplet
   - TileMatchingCube
+  - LampControl
+  - Mineable
+  - Skeleton
   layers:
   - Default
   - TransparentFX
@@ -58,4 +61,13 @@ TagManager:
     locked: 0
   - name: Fire
     uniqueID: 1145090201
+    locked: 0
+  - name: SlingshotBack
+    uniqueID: 2585803253
+    locked: 0
+  - name: Rock
+    uniqueID: 3156293743
+    locked: 0
+  - name: SlingshotFront
+    uniqueID: 497594455
     locked: 0

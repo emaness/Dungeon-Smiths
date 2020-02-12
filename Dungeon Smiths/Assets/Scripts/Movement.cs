@@ -50,32 +50,43 @@ public class Movement : MonoBehaviour
 
         if (moveStick.Horizontal != 0 || moveStick.Vertical != 0)
         {
-            transform.Translate(-moveStick.Horizontal * 0.1f, 0, -moveStick.Vertical * 0.1f);
+            transform.Translate(-moveStick.Horizontal * 0.2f, 0, -moveStick.Vertical * 0.2f);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+
+            if (GetComponent<AudioSource>().isPlaying == false)
+            {
+                GetComponent<AudioSource>().volume = Random.Range(0.6f, .8f);
+                GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.05f);
+                GetComponent<AudioSource>().Play();
+            }
         }
         if (camStick.Horizontal != 0 || camStick.Vertical != 0)
         {
-            transform.Rotate(0, camStick.Horizontal, 0);
-            cam.transform.Rotate(0, camStick.Horizontal, 0);
+            transform.Rotate(0, camStick.Horizontal * 3.0f, 0);
+            cam.transform.Rotate(0, camStick.Horizontal * 3.0f, 0);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        string scene = null;
+
         if(other.gameObject.CompareTag("FireObstacle"))
         {
-            Destroy(other.gameObject);
-            moveStick.Reset();
-            camStick.Reset();
-
-            foreach(GameObject obj in gameObject.scene.GetRootGameObjects())
-            {
-                obj.SetActive(false);
-            }
-
-            SceneManager.LoadScene("FireGame", LoadSceneMode.Additive);
+            scene = "FireGame";
         } else if(other.gameObject.CompareTag("TileMatchingCube"))
+        {
+            scene = "TileMatchingGame";
+        } else if(other.gameObject.CompareTag("Skeleton"))
+        {
+            scene = "AngryRocks";
+        } else if(other.gameObject.CompareTag("Spider"))
+        {
+            scene = "spiderScene";
+        }
+
+        if (scene != null)
         {
             Destroy(other.gameObject);
             moveStick.Reset();
@@ -86,7 +97,7 @@ public class Movement : MonoBehaviour
                 obj.SetActive(false);
             }
 
-            SceneManager.LoadScene("TileMatchingGame", LoadSceneMode.Additive);
+            SceneManager.LoadScene(scene, LoadSceneMode.Additive);
         }
     }
 }

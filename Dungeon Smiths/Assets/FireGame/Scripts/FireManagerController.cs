@@ -38,7 +38,7 @@ public class FireManagerController : MonoBehaviour
         TryAgain.gameObject.SetActive(false);
         fireballTimer = FireballInterval;
         remainingFires = new Queue<FireState>();
-        enqueueFires(500, 100);
+        enqueueFires(200, 100);
         initialFireCount = remainingFires.Count;
         SpawnFires();
     }
@@ -77,7 +77,7 @@ public class FireManagerController : MonoBehaviour
 
         SceneManager.UnloadSceneAsync("FireGame");
 
-        Scene mt = SceneManager.GetSceneByName("MovementTest");
+        Scene mt = SceneManager.GetSceneByName("Level1");
         foreach(GameObject obj in mt.GetRootGameObjects())
         {
             obj.SetActive(true);
@@ -109,6 +109,13 @@ public class FireManagerController : MonoBehaviour
                     newFireball.GetComponent<FireballController>().hose = hose;
                     var rb = newFireball.GetComponent<Rigidbody2D>();
                     rb.velocity = vel;
+
+                    if (GetComponent<AudioSource>().isPlaying == false)
+                    {
+                        GetComponent<AudioSource>().volume = Random.Range(0.6f, .8f);
+                        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1);
+                        GetComponent<AudioSource>().Play();
+                    }
                 }
             }
 
