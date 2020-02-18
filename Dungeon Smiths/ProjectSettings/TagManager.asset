@@ -13,6 +13,13 @@ TagManager:
   - LampControl
   - Mineable
   - Skeleton
+  - OilBarrel
+  - AI
+  - Eatable
+  - Generator
+  - DrinkAble
+  - SpotLight
+  - Spider
   layers:
   - Default
   - TransparentFX
@@ -70,4 +77,10 @@ TagManager:
     locked: 0
   - name: SlingshotFront
     uniqueID: 497594455
+    locked: 0
+  - name: Minecart
+    uniqueID: 728733635
+    locked: 0
+  - name: Terrain
+    uniqueID: 422215943
     locked: 0
