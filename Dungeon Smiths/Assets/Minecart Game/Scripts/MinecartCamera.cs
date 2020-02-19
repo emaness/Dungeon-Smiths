@@ -12,7 +12,7 @@ public class MinecartCamera : MonoBehaviour
         //Locking camera on the minecart
         transform.position = minecart.transform.position;
         Vector3 pos = transform.position;
-        pos.z = -30;
+        pos.z = -50;
         transform.position = pos;
     }
 
@@ -21,7 +21,7 @@ public class MinecartCamera : MonoBehaviour
     {
         transform.position = minecart.transform.position;
         Vector3 pos = transform.position;
-        pos.z = -30;
+        pos.z = -50;
         transform.position = pos;
     }
 }
