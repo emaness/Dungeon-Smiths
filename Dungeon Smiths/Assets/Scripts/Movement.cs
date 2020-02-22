@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public GameObject cam;
     public Joystick moveStick;
     public Joystick camStick;
+    public GameObject canvasKeep;
     private Rigidbody rigid;
     //private float moveSpeed = 10.0f;
     //private float camSpeed = 100.0f;
@@ -94,7 +95,10 @@ public class Movement : MonoBehaviour
 
             foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
             {
-                obj.SetActive(false);
+                if (obj != canvasKeep)
+                {
+                    obj.SetActive(false);
+                }
             }
 
             SceneManager.LoadScene(scene, LoadSceneMode.Additive);
