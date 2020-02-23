@@ -23,32 +23,6 @@ public class Movement : MonoBehaviour
     void Update()
     {
         rigid.constraints = RigidbodyConstraints.FreezeAll;
-        /*
-        if (Input.GetKey("w"))
-        {
-            transform.Translate(0, 0, -moveSpeed * Time.deltaTime);
-            rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-        }
-        if (Input.GetKey("a"))
-        {
-            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
-            transform.Rotate(0, -camSpeed * Time.deltaTime, 0);
-            cam.transform.Rotate(0, -camSpeed * Time.deltaTime, 0);
-            rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-        }
-        if (Input.GetKey("s"))
-        {
-            transform.Translate(0, 0, moveSpeed * Time.deltaTime);
-            rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-        }
-        if (Input.GetKey("d"))
-        {
-            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
-            transform.Rotate(0, camSpeed * Time.deltaTime, 0);
-            cam.transform.Rotate(0, camSpeed * Time.deltaTime, 0);
-            rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-        }*/
-
         if (moveStick.Horizontal != 0 || moveStick.Vertical != 0)
         {
             transform.Translate(-moveStick.Horizontal * 0.2f, 0, -moveStick.Vertical * 0.2f);

@@ -13,14 +13,14 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        internalTimer = totalSeconds;
         timeText = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        internalTimer = totalSeconds;
-        internalTimer -= Time.time;
+        internalTimer -= Time.deltaTime;
         if (internalTimer <= 0)
         {
             SceneManager.LoadScene("GameOver");

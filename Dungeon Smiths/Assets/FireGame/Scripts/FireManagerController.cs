@@ -80,7 +80,10 @@ public class FireManagerController : MonoBehaviour
         Scene mt = SceneManager.GetSceneByName("Level1");
         foreach(GameObject obj in mt.GetRootGameObjects())
         {
-            obj.SetActive(true);
+            if (obj.name != "PauseMenu")
+            {
+                obj.SetActive(true);
+            }
         }
     }
 
