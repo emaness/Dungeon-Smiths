@@ -12,11 +12,37 @@ public class GameController : MonoBehaviour
 	[SerializeField] public ballDrop[] balls;
 	public int ballCount = 6;
 	[SerializeField] public Text countText;
+	[SerializeField] public Text YouWin;
+	[SerializeField] public Text TryAgain;
 
 	void Start()
 	{
+		YouWin.gameObject.SetActive(false);
+		TryAgain.gameObject.SetActive(false);
 		ballCount = 6;
 		countText.text = "Balls Left: " + ballCount.ToString();
+	}
+
+	private IEnumerator DoWin()
+	{
+		yield return new WaitForSeconds(2.5f);
+
+		SceneManager.UnloadSceneAsync("SpiderScene");
+
+		Scene mt = SceneManager.GetSceneByName("Level1");
+		foreach (GameObject obj in mt.GetRootGameObjects())
+		{
+			obj.SetActive(true);
+		}
+	}
+
+	private IEnumerator DoTryAgain()
+	{
+
+		TryAgain.gameObject.SetActive(true);
+		yield return new WaitForSeconds(2.5f);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
 	}
 
 	void Update()
@@ -24,12 +50,13 @@ public class GameController : MonoBehaviour
 		if(spiderCount == 0)
 		{
 			//game won
-			print("win");
+			YouWin.gameObject.SetActive(true);
+			StartCoroutine("DoWin");
 		}
 		if(spiderCount > 0 && ballCount < 1 && balls[0].transform.position.y < -8 )
 		{
 			//restart
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			StartCoroutine("DoTryAgain");
 		}
 
 		if (Input.GetMouseButtonDown(0) && ballCount > 0)

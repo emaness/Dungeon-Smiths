@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
 public class sceneController : MonoBehaviour
 {
 
@@ -12,10 +16,12 @@ public class sceneController : MonoBehaviour
 	public const float offsetY = 3;
 
 	[SerializeField] public Card originalCard;
+	[SerializeField] public Text YouWin;
 	[SerializeField] public Sprite[] images;
 
 	private void Start()
 	{
+		YouWin.gameObject.SetActive(false);
 		Vector3 startPos = originalCard.transform.position;
 
 		int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7,8,8 };
@@ -63,9 +69,23 @@ public class sceneController : MonoBehaviour
 	}
 
 
+	private IEnumerator DoWin()
+	{
+		yield return new WaitForSeconds(2.5f);
+
+		SceneManager.UnloadSceneAsync("TileMatchingGame");
+
+		Scene mt = SceneManager.GetSceneByName("Level1");
+		foreach (GameObject obj in mt.GetRootGameObjects())
+		{
+			obj.SetActive(true);
+		}
+	}
+
 
 	private Card firstCard;
 	private Card secondCard;
+	private int cardCount = 9;
 
 	public bool canReveal()
 	{
@@ -87,13 +107,20 @@ public class sceneController : MonoBehaviour
 
 	private IEnumerator checkMatch()
 	{
-		if(firstCard.id == secondCard.id)
+		yield return new WaitForSeconds(.5f);
+		if (firstCard.id == secondCard.id)
 		{
-
+			Destroy(firstCard.gameObject);
+			Destroy(secondCard.gameObject);
+			cardCount--;
+			if(cardCount == 0)
+			{
+				YouWin.gameObject.SetActive(true);
+				StartCoroutine("DoWin");
+			}
 		}
 		else
 		{
-			yield return new WaitForSeconds(.5f);
 			firstCard.unReveal();
 			secondCard.unReveal();
 		}
