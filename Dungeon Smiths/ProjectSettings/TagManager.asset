@@ -20,6 +20,7 @@ TagManager:
   - DrinkAble
   - SpotLight
   - Spider
+  - Minecart
   layers:
   - Default
   - TransparentFX

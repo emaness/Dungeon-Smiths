@@ -53,9 +53,12 @@ public class Movement : MonoBehaviour
         } else if(other.gameObject.CompareTag("TileMatchingCube"))
         {
             scene = "TileMatchingGame";
+        } else if(other.gameObject.CompareTag("Minecart"))
+        {
+            scene = "Minecart Game";  
         } else if(other.gameObject.CompareTag("Skeleton"))
         {
-            scene = "AngryRocks";
+            scene = "RockThrowing";
         } else if(other.gameObject.CompareTag("Spider"))
         {
             scene = "spiderScene";
