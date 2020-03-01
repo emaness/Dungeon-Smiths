@@ -5,18 +5,23 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fireball
+  - Fire
+  - FireObstacle
+  - Hose
   - WaterDroplet
+  - TileMatchingCube
+  - LampControl
+  - Mineable
+  - Skeleton
   - OilBarrel
   - AI
   - Eatable
-  - LampControl
   - Generator
   - DrinkAble
-  - Fire
   - SpotLight
-  - FireObstacle
-  - TileMatchingCube
-  - Mineable
+  - Spider
+  - Minecart
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -51,6 +56,39 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4087751323
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Water
+    uniqueID: 764788591
+    locked: 0
+  - name: Hose
+    uniqueID: 1487459143
+    locked: 0
+  - name: Fire
+    uniqueID: 1145090201
+    locked: 0
+  - name: SlingshotBack
+    uniqueID: 2585803253
+    locked: 0
+  - name: SlingshotBackAnchor
+    uniqueID: 3361488395
+    locked: 0
+  - name: Rock
+    uniqueID: 3156293743
+    locked: 0
+  - name: SlingshotFront
+    uniqueID: 497594455
+    locked: 0
+  - name: SlingshotFrontAnchor
+    uniqueID: 847316279
+    locked: 0
+  - name: Minecart
+    uniqueID: 728733635
+    locked: 0
+  - name: Terrain
+    uniqueID: 422215943
     locked: 0
