@@ -21,6 +21,7 @@ TagManager:
   - SpotLight
   - Spider
   - Minecart
+  - Rock
   layers:
   - Default
   - TransparentFX
