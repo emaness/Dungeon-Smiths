@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class sceneController : MonoBehaviour
 {
@@ -13,9 +15,12 @@ public class sceneController : MonoBehaviour
 
 	[SerializeField] public Card originalCard;
 	[SerializeField] public Sprite[] images;
+	[SerializeField] public Text YouWin;
+	private int numCards = 9;
 
 	private void Start()
 	{
+		YouWin.gameObject.SetActive(false);
 		Vector3 startPos = originalCard.transform.position;
 
 		int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7,8,8 };
@@ -84,11 +89,39 @@ public class sceneController : MonoBehaviour
 			StartCoroutine(checkMatch());
 		}
 	}
+	private IEnumerator DoWin()
+	{
+		yield return new WaitForSeconds(2.5f);
+
+		SceneManager.UnloadSceneAsync("TileMatchingGame");
+
+		Scene mt = SceneManager.GetSceneByName("Level1");
+		foreach (GameObject obj in mt.GetRootGameObjects())
+		{
+			if (obj.name != "PauseMenu")
+			{
+				obj.SetActive(true);
+			}
+		}
+	}
+
 
 	private IEnumerator checkMatch()
 	{
 		if(firstCard.id == secondCard.id)
 		{
+			yield return new WaitForSeconds(.5f);
+			Destroy(firstCard.gameObject);
+			Destroy(secondCard.gameObject);
+			numCards--;
+			if(numCards == 0)
+			{
+				//end game
+				YouWin.gameObject.SetActive(true);
+				StartCoroutine("DoWin");
+
+			}
+
 
 		}
 		else

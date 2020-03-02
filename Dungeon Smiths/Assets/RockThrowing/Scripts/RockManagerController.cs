@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class RockManagerController : MonoBehaviour
 {
     public GameObject rockPrefab;
+    public Image skelBar;
     private Vector3 rockInitialPos;
 
     private bool dragging;
@@ -17,6 +19,8 @@ public class RockManagerController : MonoBehaviour
     {
         var rock = gameObject.transform.GetChild(0).gameObject;
         rockInitialPos = rock.transform.position;
+        rockInitialPos.z = 0;
+        rock.GetComponent<RockController>().skelBar = skelBar;
         dragging = false;
         winning = false;
     }
@@ -25,7 +29,7 @@ public class RockManagerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
 
-        SceneManager.UnloadSceneAsync("AngryRocks");
+        SceneManager.UnloadSceneAsync("RockThrowing");
         Scene mt = SceneManager.GetSceneByName("Level1");
         foreach (GameObject obj in mt.GetRootGameObjects())
         {
@@ -49,7 +53,8 @@ public class RockManagerController : MonoBehaviour
         if(gameObject.transform.childCount == 0)
         {
             // the rock was destroyed, need to spawn another one
-            Instantiate(rockPrefab, rockInitialPos, Quaternion.identity, transform);
+            var go = Instantiate(rockPrefab, rockInitialPos, Quaternion.identity, transform);
+            go.GetComponent<RockController>().skelBar = skelBar;
             return;
         }
 

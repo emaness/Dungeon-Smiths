@@ -5,30 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    private bool paused = false;
     public Joystick moveStick;
     public Joystick camStick;
-    public GameObject pauseMenu;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void sceneChange(string scene)
     {
-        if (paused)
-        {
-            Time.timeScale = 1f;
-            paused = false;
-        }
+        Time.timeScale = 1f;
         if (scene == "Exit")
         {
             Application.Quit();
@@ -38,33 +20,28 @@ public class MenuManager : MonoBehaviour
 
     public void CallPauseButton()
     {
-        if (!paused)
+        moveStick.Reset();
+        camStick.Reset();
+        foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
         {
-            foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
+            if (obj.name != "MenuManager")
             {
-                if (obj.name != "Main Camera" && obj.name != "EventSystem")
-                {
-                    obj.SetActive(false);
-                }
+                obj.SetActive(false);
             }
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
-            paused = true;
         }
-        else
+        SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+
+        SceneManager.UnloadSceneAsync("PauseMenu");
+        Scene mainLevel = SceneManager.GetSceneByName(SceneManager.GetActiveScene().name);
+        foreach (GameObject obj in mainLevel.GetRootGameObjects())
         {
-            foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
-            {
-                if (obj.name != "Main Camera" && obj.name != "EventSystem")
-                {
-                    obj.SetActive(true);
-                }
-            }
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1f;
-            paused = false;
-            moveStick.Reset();
-            camStick.Reset();
+            obj.SetActive(true);
         }
+        Time.timeScale = 1f;
     }
 }

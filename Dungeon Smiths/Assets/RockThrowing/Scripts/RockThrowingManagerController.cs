@@ -3,7 +3,7 @@ using System.Collections;
 
 using UnityEngine.SceneManagement;
 
-public class AngryRocksManagerController : MonoBehaviour
+public class RockThrowingManagerController : MonoBehaviour
 {
     public void Quit()
     {
@@ -12,7 +12,10 @@ public class AngryRocksManagerController : MonoBehaviour
         Scene mt = SceneManager.GetSceneByName("Level1");
         foreach (GameObject obj in mt.GetRootGameObjects())
         {
-            obj.SetActive(true);
+            if (obj.name != "PauseMenu")
+            {
+                obj.SetActive(true);
+            }
         }
     }
 }

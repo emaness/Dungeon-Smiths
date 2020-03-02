@@ -22,39 +22,40 @@ TagManager:
   - Spider
   - Minecart
   - Rock
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Background
     uniqueID: 4087751323
@@ -74,11 +75,17 @@ TagManager:
   - name: SlingshotBack
     uniqueID: 2585803253
     locked: 0
+  - name: SlingshotBackAnchor
+    uniqueID: 3361488395
+    locked: 0
   - name: Rock
     uniqueID: 3156293743
     locked: 0
   - name: SlingshotFront
     uniqueID: 497594455
+    locked: 0
+  - name: SlingshotFrontAnchor
+    uniqueID: 847316279
     locked: 0
   - name: Minecart
     uniqueID: 728733635
