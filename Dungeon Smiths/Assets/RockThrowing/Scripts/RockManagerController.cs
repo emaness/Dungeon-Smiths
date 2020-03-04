@@ -8,12 +8,14 @@ public class RockManagerController : MonoBehaviour
 {
     public GameObject rockPrefab;
     public Image skelBar;
+    public GameObject rockExplosionPrefab;
     private Vector3 rockInitialPos;
 
     private bool dragging;
     private Vector3 dragEnd;
 
-    private bool winning;
+    private bool stopped;
+    public int rocksRemaining = 10;
 
     void Start()
     {
@@ -21,8 +23,9 @@ public class RockManagerController : MonoBehaviour
         rockInitialPos = rock.transform.position;
         rockInitialPos.z = 0;
         rock.GetComponent<RockController>().skelBar = skelBar;
+        rock.GetComponent<RockController>().rockExplosionPrefab = rockExplosionPrefab;
         dragging = false;
-        winning = false;
+        stopped = false;
     }
 
     private IEnumerator DoWin()
@@ -37,15 +40,34 @@ public class RockManagerController : MonoBehaviour
         }
     }
 
+    public IEnumerator GameOver()
+    {
+        var rock = GameObject.FindWithTag("Rock");
+        if (rock != null)
+        {
+            Destroy(rock);
+        }
+
+        var ss = GameObject.Find("slingshot");
+        if (ss != null)
+        {
+            Destroy(ss);
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // restart
+    }
+
     public void StartWin()
     {
-        winning = true;
+        stopped = true;
         StartCoroutine("DoWin");
     }
 
     void Update()
     {
-        if(winning)
+        if(stopped || GameObject.Find("slingshot") == null)
         {
             return;
         }
@@ -53,8 +75,21 @@ public class RockManagerController : MonoBehaviour
         if(gameObject.transform.childCount == 0)
         {
             // the rock was destroyed, need to spawn another one
+           
+            --rocksRemaining;
+            Destroy(GameObject.Find("rock" + (rocksRemaining + 1)));
+            if (rocksRemaining == 0)
+            {
+                stopped = true;
+                StartCoroutine("GameOver");
+                return;
+            }
+
             var go = Instantiate(rockPrefab, rockInitialPos, Quaternion.identity, transform);
-            go.GetComponent<RockController>().skelBar = skelBar;
+            var ctrl = go.GetComponent<RockController>();
+            ctrl.skelBar = skelBar;
+            ctrl.rockExplosionPrefab = rockExplosionPrefab;
+
             return;
         }
 

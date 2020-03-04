@@ -23,6 +23,8 @@ TagManager:
   - Minecart
   - Rock
   - Wall
+  - Rock
+  - SkeletonWeakPoint
   layers:
   - Default
   - TransparentFX
@@ -77,6 +79,9 @@ TagManager:
     locked: 0
   - name: SlingshotBackAnchor
     uniqueID: 3361488395
+    locked: 0
+  - name: SkeletonWeakPoint
+    uniqueID: 1644888631
     locked: 0
   - name: Rock
     uniqueID: 3156293743
