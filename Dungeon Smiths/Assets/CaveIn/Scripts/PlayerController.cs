@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,11 +10,15 @@ public class PlayerController : MonoBehaviour
     //public GameObject BlockController;
     public Text GameOver;
     public Button TryAgain;
+    private bool Losing;
+    private float TimeElapsed;
 
     void Start()
 	{
+        Losing = false;
         GameOver.gameObject.SetActive(false);
         TryAgain.gameObject.SetActive(false);
+        TimeElapsed = 0.0f;
     }
 
     // Start is called before the first frame update
@@ -24,22 +29,40 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("with tag Rock");
             DoLose();
-            
-
         }
-
     }
 
     public void DoLose()
     {
+        Losing = true;
+        /*
         Destroy(character);
-        GameOver.gameObject.SetActive(true);
-        TryAgain.gameObject.SetActive(true);
+
+        SceneManager.UnloadSceneAsync("CaveIn").completed += e =>
+        {
+            SceneManager.LoadScene("CaveIn", LoadSceneMode.Additive);
+        };
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        /*if(Losing)
+        {
+            return;
+        }*/
+
+        TimeElapsed += Time.deltaTime;
+        if(TimeElapsed >= 4.0f)
+        {
+            SceneManager.LoadScene("Level 2");
+            // SceneManager.UnloadSceneAsync("Level1");
+            // SceneManager.UnloadSceneAsync("CaveIn");
+            return;
+        }
+
         if (Input.mousePresent || Input.touchSupported)
         {
             bool down;

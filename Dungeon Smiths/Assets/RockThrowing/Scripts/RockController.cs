@@ -23,7 +23,7 @@ public class RockController : MonoBehaviour
         {
             var skel = GameObject.FindWithTag("Skeleton");
             var ctrl = skel.GetComponent<SkeletonController>();
-            ctrl.Health -= 1;
+            ctrl.Health = GameObject.FindGameObjectsWithTag("SkeletonWeakPoint").Length - 1;
 
             skelBar.rectTransform.localScale = new Vector3(ctrl.Health / (float)ctrl.InitialHealth, 1.0f, 1.0f);
 

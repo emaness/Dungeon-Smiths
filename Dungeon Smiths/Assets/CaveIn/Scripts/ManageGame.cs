@@ -8,15 +8,16 @@ public class ManageGame : MonoBehaviour
     public void restart()
 	{
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
+
+    /*
     public IEnumerator advance()
 	{
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4.0f);
 
         SceneManager.UnloadSceneAsync("CaveIn");
 
-        Scene mt = SceneManager.GetSceneByName("Level1");
+        Scene mt = SceneManager.GetSceneByName("Level 2");
 
         foreach (GameObject obj in mt.GetRootGameObjects())
         {
@@ -26,4 +27,5 @@ public class ManageGame : MonoBehaviour
             }
         }
     }
+    */
 }

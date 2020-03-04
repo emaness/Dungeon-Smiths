@@ -27,7 +27,7 @@ public class BlockController : MonoBehaviour
 
     }
 
-    
+    /*
     public IEnumerator advance()
     {
         yield return new WaitForSeconds(2.5f);
@@ -43,7 +43,7 @@ public class BlockController : MonoBehaviour
                 obj.SetActive(true);
             }
         }
-    }
+    }*/
     
 
     void SpawnBlock()
@@ -73,7 +73,7 @@ public class BlockController : MonoBehaviour
             }
             else
             {
-                this.advance();
+                // this.advance();
                 Debug.Log("advance called");
             }
         }

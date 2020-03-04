@@ -41,7 +41,10 @@ public class GameController : MonoBehaviour
 	private IEnumerator DoRestart()
 	{
 		yield return new WaitForSeconds(2.5f);
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		SceneManager.UnloadSceneAsync("webEscape").completed += e =>
+		{
+			SceneManager.LoadScene("webEscape", LoadSceneMode.Additive);
+		};
 	}
 	void Update()
 	{

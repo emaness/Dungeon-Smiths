@@ -30,13 +30,16 @@ public class RockManagerController : MonoBehaviour
 
     private IEnumerator DoWin()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(4.0f);
 
         SceneManager.UnloadSceneAsync("RockThrowing");
         Scene mt = SceneManager.GetSceneByName("Level1");
         foreach (GameObject obj in mt.GetRootGameObjects())
         {
-            obj.SetActive(true);
+            if (obj.name != "PauseMenu")
+            {
+                obj.SetActive(true);
+            }
         }
     }
 
@@ -56,7 +59,10 @@ public class RockManagerController : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // restart
+        SceneManager.UnloadSceneAsync("RockThrowing").completed += e =>
+        {
+            SceneManager.LoadScene("RockThrowing", LoadSceneMode.Additive);
+        };
     }
 
     public void StartWin()
