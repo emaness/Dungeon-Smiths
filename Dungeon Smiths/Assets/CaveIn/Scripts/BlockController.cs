@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class BlockController : MonoBehaviour
 {
 
-    private const int maxBlocks = 10;
+    private const int maxBlocks = 40;
     private const float BlockInterval = 0.15f;
 
     private int blocksFallen;
@@ -71,11 +71,7 @@ public class BlockController : MonoBehaviour
                 blockTimer = BlockInterval;
 
             }
-            else
-            {
-                // this.advance();
-                Debug.Log("advance called");
-            }
+            
         }
 
         //if (Input.touchCount > 0)

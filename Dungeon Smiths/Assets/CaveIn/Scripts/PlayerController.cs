@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     public GameObject character;
     //public GameObject BlockController;
     public Text GameOver;
-    public Button TryAgain;
+
+    public Text Win;
     private bool Losing;
     private float TimeElapsed;
 
@@ -17,17 +18,17 @@ public class PlayerController : MonoBehaviour
 	{
         Losing = false;
         GameOver.gameObject.SetActive(false);
-        TryAgain.gameObject.SetActive(false);
+
+        Win.gameObject.SetActive(false);
         TimeElapsed = 0.0f;
     }
 
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D collider)
-    {
-        Debug.Log("Hit block");
+    { 
         if (collider.gameObject.CompareTag("Rock"))
         {
-            Debug.Log("with tag Rock");
+            
             DoLose();
         }
     }
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public void DoLose()
     {
         Losing = true;
+        TimeElapsed = 7.0f;
         /*
         Destroy(character);
 
@@ -49,15 +51,24 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        /*if(Losing)
+        if(Losing)
         {
+            Destroy(character);
+            GameOver.gameObject.SetActive(true);
+            SceneManager.LoadScene("CaveIn");
             return;
-        }*/
+            //Debug.Log(TimeElapsed);
+        }
 
         TimeElapsed += Time.deltaTime;
-        if(TimeElapsed >= 4.0f)
-        {
+        if(TimeElapsed >= 9.0f)
+		{
+
+            Win.gameObject.SetActive(true);
+
+            
             SceneManager.LoadScene("Level 2");
+            
             // SceneManager.UnloadSceneAsync("Level1");
             // SceneManager.UnloadSceneAsync("CaveIn");
             return;
