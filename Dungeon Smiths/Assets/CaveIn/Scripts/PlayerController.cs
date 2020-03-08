@@ -25,11 +25,12 @@ public class PlayerController : MonoBehaviour
 
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D collider)
-    { 
+    {
+        Debug.Log("player hit something");
         if (collider.gameObject.CompareTag("Rock"))
         {
-            
-            DoLose();
+            Debug.Log("player hit rock");
+            this.DoTryAgain();
         }
     }
 
@@ -47,31 +48,57 @@ public class PlayerController : MonoBehaviour
         */
     }
 
+    private IEnumerator DoWin()
+    {
+        Win.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.5f);
+
+        SceneManager.UnloadSceneAsync("CaveIn");
+
+        Scene mt = SceneManager.GetSceneByName("Level2");
+        foreach (GameObject obj in mt.GetRootGameObjects())
+        {
+            obj.SetActive(true);
+        }
+    }
+
+    private IEnumerator DoTryAgain()
+    {
+        Debug.Log("Doing Try again");
+        Destroy(character);
+        GameOver.gameObject.SetActive(true);
+		//TryAgain.gameObject.SetActive(true);
+        SceneManager.LoadScene("CaveIn");
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
 
-        if(Losing)
-        {
-            Destroy(character);
-            GameOver.gameObject.SetActive(true);
-            SceneManager.LoadScene("CaveIn");
-            return;
-            //Debug.Log(TimeElapsed);
-        }
+        //if(Losing)
+        //{
+        //    Destroy(character);
+        //    GameOver.gameObject.SetActive(true);
+        //    SceneManager.LoadScene("CaveIn");
+        //    return;
+        //    //Debug.Log(TimeElapsed);
+        //}
 
         TimeElapsed += Time.deltaTime;
         if(TimeElapsed >= 9.0f)
 		{
-
-            Win.gameObject.SetActive(true);
+            this.DoWin();
+            //Win.gameObject.SetActive(true);
 
             
-            SceneManager.LoadScene("Level 2");
+            //SceneManager.LoadScene("Level 2");
             
-            // SceneManager.UnloadSceneAsync("Level1");
-            // SceneManager.UnloadSceneAsync("CaveIn");
-            return;
+            //// SceneManager.UnloadSceneAsync("Level1");
+            //// SceneManager.UnloadSceneAsync("CaveIn");
+            //return;
         }
 
         if (Input.mousePresent || Input.touchSupported)

@@ -11,11 +11,11 @@ public class BlockCollisionController : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Hit character");
+        //Debug.Log("Hit character");
         if (collider.gameObject.CompareTag("Player"))
         {
             //BlockController.SendMessage("DoLose");
-            Debug.Log("with tag Player");
+            //Debug.Log("with tag Player");
 
         }
 
