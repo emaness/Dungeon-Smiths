@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class BlockController : MonoBehaviour
 {
 
-    private const int maxBlocks = 40;
+    private const int maxBlocks = 50;
     private const float BlockInterval = 0.15f;
 
     private int blocksFallen;
