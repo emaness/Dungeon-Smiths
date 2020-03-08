@@ -14,7 +14,6 @@ public class FireManagerController : MonoBehaviour
     public GameObject hose;
 
     public Text YouWin;
-    public Button TryAgain;
     public Image FireBar;
 
     // represents the health of the overall fire column
@@ -25,7 +24,7 @@ public class FireManagerController : MonoBehaviour
 
     private void enqueueFires(int count, float health)
     {
-        for(int i = 0; i != count; ++i)
+        for (int i = 0; i != count; ++i)
         {
             FireState fs = new FireState(health);
             remainingFires.Enqueue(fs);
@@ -35,7 +34,6 @@ public class FireManagerController : MonoBehaviour
     private void Start()
     {
         YouWin.gameObject.SetActive(false);
-        TryAgain.gameObject.SetActive(false);
         fireballTimer = FireballInterval;
         remainingFires = new Queue<FireState>();
         enqueueFires(200, 100);
@@ -47,9 +45,9 @@ public class FireManagerController : MonoBehaviour
     {
         int numFires = findFires().Count;
         int numToCreate = Mathf.Min(MaxActiveFires - numFires, remainingFires.Count);
-        for(int i = 0; i != numToCreate; ++i)
+        for (int i = 0; i != numToCreate; ++i)
         {
-            Vector3 spawnPos = new Vector3(Random.Range(2.5f, 3.4f), Random.Range(-1.55f, 1.55f), 0.0f);
+            Vector3 spawnPos = new Vector3(Random.Range(-3.25f, 3.25f), Random.Range(1.3f, 1.8f), 0.0f);
             GameObject newFire = Instantiate(fire, spawnPos, Quaternion.identity, gameObject.transform);
             FireState fs = remainingFires.Dequeue();
             newFire.GetComponent<FireController>().State = fs;
@@ -71,6 +69,21 @@ public class FireManagerController : MonoBehaviour
         return fires;
     }
 
+    private IEnumerator DoGameOver()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        SceneManager.UnloadSceneAsync("FireGame").completed += e =>
+        {
+            SceneManager.LoadScene("FireGame", LoadSceneMode.Additive);
+        };
+    }
+
+    public void GameOver()
+    {
+        StartCoroutine("DoGameOver");
+    }
+
     private IEnumerator DoWin()
     {
         yield return new WaitForSeconds(2.5f);
@@ -78,24 +91,21 @@ public class FireManagerController : MonoBehaviour
         SceneManager.UnloadSceneAsync("FireGame");
 
         Scene mt = SceneManager.GetSceneByName("Level1");
-        foreach(GameObject obj in mt.GetRootGameObjects())
+        foreach (GameObject obj in mt.GetRootGameObjects())
         {
-            if (obj.name != "PauseMenu")
-            {
-                obj.SetActive(true);
-            }
+            obj.SetActive(true);
         }
     }
 
     private void Update()
     {
         fireballTimer -= Time.deltaTime;
-        if(fireballTimer < 0.0f)
+        if (fireballTimer < 0.0f)
         {
-            if(Random.Range(0, 10) < 4)
+            if (Random.Range(0, 10) < 4)
             {
                 var fires = findFires();
-                if(fires.Count > 0)
+                if (fires.Count > 0)
                 {
                     GameObject fromFire = fires[Random.Range(0, fires.Count)];
                     Vector3 p = fromFire.transform.position;

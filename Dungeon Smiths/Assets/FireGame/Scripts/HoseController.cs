@@ -5,12 +5,8 @@ using UnityEngine.UI;
 
 public class HoseController : MonoBehaviour
 {
-    
     public GameObject waterDroplet;
     public GameObject waterSpawnPoint;
-
-    public Text GameOver;
-    public Button TryAgain;
 
     public Image healthBar;
 
@@ -23,8 +19,6 @@ public class HoseController : MonoBehaviour
     {
         health = 100.0f;
         dropletTimeout = 0.0f;
-        GameOver.gameObject.SetActive(false);
-        TryAgain.gameObject.SetActive(false);
     }
 
     public void ApplyDamage(float damage)
@@ -32,12 +26,15 @@ public class HoseController : MonoBehaviour
         health -= damage;
         if(health <= 0.01f)
         {
-            GameOver.gameObject.SetActive(true);
-            TryAgain.gameObject.SetActive(true);
             dead = true;
             health = 0.0f;
+            GameObject.Find("FireManager").GetComponent<FireManagerController>().GameOver();
         }
         healthBar.rectTransform.localScale = new Vector3(health / 100.0f, 1.0f, 1.0f);
+        if(dead)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -72,7 +69,7 @@ public class HoseController : MonoBehaviour
                 // turn
                 Vector3 wp = Camera.main.ScreenToWorldPoint(pos);
                 Vector3 d = wp - gameObject.transform.position;
-                if(Vector2.Dot(new Vector2(d.x, d.y), new Vector2(1, 0)) > 0.4)
+                if(Vector2.Dot(new Vector2(d.x, d.y), new Vector2(0, 1)) > 0.4)
                 {
                     float currentAngle = gameObject.transform.rotation.eulerAngles.z;
                     if(currentAngle > 180)
