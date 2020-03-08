@@ -21,6 +21,7 @@ public class ballDrop : MonoBehaviour
 	{
 		if(col.gameObject.tag == "Spider")
 		{
+			GetComponent<AudioSource>().Play();
 			Destroy(col.gameObject);
 			con.spiderCount--;
 		}
