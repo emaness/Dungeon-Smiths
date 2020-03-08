@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6, y: -149.8}
+  m_AnchoredPosition: {x: 6, y: -150.9}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &27748989
@@ -481,8 +481,6 @@ MonoBehaviour:
   waterDroplet: {fileID: 4280129511824357094, guid: 21461a96724534049962a125d120d9db,
     type: 3}
   waterSpawnPoint: {fileID: 702386532}
-  GameOver: {fileID: 0}
-  TryAgain: {fileID: 0}
   healthBar: {fileID: 721673990}
   dead: 0
 --- !u!61 &428642746
@@ -518,7 +516,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428642742}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1b873cbb2ec4240b48f73457002f03d2, type: 3}
@@ -739,7 +737,6 @@ MonoBehaviour:
     type: 3}
   hose: {fileID: 428642742}
   YouWin: {fileID: 1220841734}
-  TryAgain: {fileID: 0}
   FireBar: {fileID: 1407615174}
 --- !u!82 &571394080
 AudioSource:
@@ -748,7 +745,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571394077}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7575f4814720b4b509b55764405171f1, type: 3}
@@ -901,7 +898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 41.9, y: -151.8}
+  m_AnchoredPosition: {x: 41.9, y: -152.9}
   m_SizeDelta: {x: 63, y: 9}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &721673990
@@ -974,7 +971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -28.7, y: -149.8}
+  m_AnchoredPosition: {x: -28.699997, y: -150.9}
   m_SizeDelta: {x: 67.5, y: 13.5}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &823453025
@@ -1047,7 +1044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 4, y: -149.79999}
+  m_AnchoredPosition: {x: 4, y: -150.89998}
   m_SizeDelta: {x: 37.5, y: 22.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &952976482
@@ -1201,7 +1198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30.699997, y: -151.8}
+  m_AnchoredPosition: {x: -30.699997, y: -152.9}
   m_SizeDelta: {x: 63, y: 9}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1407615174
@@ -1274,7 +1271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 39.40001, y: -149.79999}
+  m_AnchoredPosition: {x: 39.40001, y: -150.89998}
   m_SizeDelta: {x: 67.5, y: 13.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1725217050

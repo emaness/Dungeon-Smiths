@@ -26,6 +26,8 @@ TagManager:
   - Rock
   - SkeletonWeakPoint
   - EndLevel1Rock
+  - Snake
+  - Gorilla
   layers:
   - Default
   - TransparentFX
