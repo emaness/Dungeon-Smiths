@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
         } else if(other.gameObject.CompareTag("EndLevel1Rock"))
         {
             scene = "CaveIn";
-        }
+        }   
 
         if (scene != null)
         {
