@@ -1105,6 +1105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db226be4d57e94e3ebf0e891217e3a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 6
   player: {fileID: 1819864114}
   speed: 0.01
 --- !u!1001 &175017872
@@ -1486,6 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db226be4d57e94e3ebf0e891217e3a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 6
   player: {fileID: 1819864114}
   speed: 0.01
 --- !u!1001 &254733049
@@ -5204,6 +5206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db226be4d57e94e3ebf0e891217e3a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 6
   player: {fileID: 855172071}
   speed: 0.01
 --- !u!1001 &864264151
@@ -6541,8 +6544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db226be4d57e94e3ebf0e891217e3a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 6
   player: {fileID: 1819864114}
-  speed: 0.01
+  speed: 5
 --- !u!1 &1148977824
 GameObject:
   m_ObjectHideFlags: 0
@@ -7423,6 +7427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db226be4d57e94e3ebf0e891217e3a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 6
   player: {fileID: 1819864114}
   speed: 0.01
 --- !u!1001 &1354637374
@@ -8364,6 +8369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db226be4d57e94e3ebf0e891217e3a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 6
   player: {fileID: 1819864114}
   speed: 0.01
 --- !u!1001 &1637853760
