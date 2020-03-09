@@ -120,6 +120,7 @@ public class Player : Singleton<Player>
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*
         if (collision.tag == "Floor")
         {
             if (collision.GetComponent<Floor>().isAdd)
@@ -187,6 +188,7 @@ public class Player : Singleton<Player>
             }
 
         }
+        */
     }
 
 

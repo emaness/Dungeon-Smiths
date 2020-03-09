@@ -38,4 +38,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/KnightGame/Scenes/KnightScene.unity
     guid: 3da72a41b0ab7a24aae8c588f0c2b3ac
+  - enabled: 1
+    path: Assets/Snake/Scenes/Snake.unity
+    guid: fb78bd52e94844600b08d33e8998a043
+  - enabled: 1
+    path: Assets/FireDragon/Scenes/FireDragon.unity
+    guid: 24822078adeb9a64fba19efe18f6fec1
+  - enabled: 1
+    path: Assets/CaveIn/Scenes/CaveIn.unity
+    guid: 92fb9b2a9c1f145c29422854232257b5
   m_configObjects: {}
