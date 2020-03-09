@@ -21,7 +21,8 @@ public class Portal : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync("Minecart Game");
 
-        Scene mt = SceneManager.GetSceneByName("Level1");
+        Scene mt = SceneManager.GetActiveScene();
+        // Scene mt = SceneManager.GetSceneByName("Level1");
         foreach (GameObject obj in mt.GetRootGameObjects())
         {
             obj.SetActive(true);

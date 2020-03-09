@@ -34,7 +34,7 @@ public class BlockController : MonoBehaviour
         
         SceneManager.UnloadSceneAsync("CaveIn");
 
-        Scene mt = SceneManager.GetSceneByName("Level1");
+        // Scene mt = SceneManager.GetSceneByName("Level1");
 
         foreach (GameObject obj in mt.GetRootGameObjects())
         {

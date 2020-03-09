@@ -33,7 +33,8 @@ public class RockManagerController : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
 
         SceneManager.UnloadSceneAsync("RockThrowing");
-        Scene mt = SceneManager.GetSceneByName("Level1");
+        Scene mt = SceneManager.GetActiveScene();
+        // Scene mt = SceneManager.GetSceneByName("Level1");
         foreach (GameObject obj in mt.GetRootGameObjects())
         {
             if (obj.name != "PauseMenu")

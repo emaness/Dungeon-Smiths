@@ -95,7 +95,8 @@ public class sceneController : MonoBehaviour
 
 		SceneManager.UnloadSceneAsync("TileMatchingGame");
 
-		Scene mt = SceneManager.GetSceneByName("Level1");
+		Scene mt = SceneManager.GetActiveScene();
+		// Scene mt = SceneManager.GetSceneByName("Level1");
 		foreach (GameObject obj in mt.GetRootGameObjects())
 		{
 			if (obj.name != "PauseMenu")

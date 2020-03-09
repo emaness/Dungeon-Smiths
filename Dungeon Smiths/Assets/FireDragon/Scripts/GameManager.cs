@@ -78,7 +78,8 @@ public class GameManager :Singleton<GameManager>
     {
         yield return new WaitForSeconds(0.5f);
         SceneManager.UnloadSceneAsync("FireDragon");
-        Scene mt = SceneManager.GetSceneByName("Level1");
+        Scene mt = SceneManager.GetActiveScene();
+        // Scene mt = SceneManager.GetSceneByName("Level1");
         foreach(GameObject obj in mt.GetRootGameObjects()) {
             if (obj.name != "PauseMenu")
             {

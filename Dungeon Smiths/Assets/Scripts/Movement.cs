@@ -68,10 +68,14 @@ public class Movement : MonoBehaviour
         {
             scene = "FireDragon";
         }
-		else if (other.gameObject.CompareTag("KnightScene"))
-		{
-			scene = "KnightScene";
-		}
+        else if (other.gameObject.CompareTag("KnightScene"))
+        {
+            scene = "KnightScene";
+        } else if(other.gameObject.CompareTag("Snake"))
+        {
+            scene = "Snake";
+        }
+
 		if (scene != null)
         {
             Destroy(other.gameObject);

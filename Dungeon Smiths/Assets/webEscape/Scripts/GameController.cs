@@ -28,7 +28,8 @@ public class GameController : MonoBehaviour
 
 		SceneManager.UnloadSceneAsync("SpiderScene");
 
-		Scene mt = SceneManager.GetSceneByName("Level1");
+		Scene mt = SceneManager.GetActiveScene();
+		// Scene mt = SceneManager.GetSceneByName("Level1");
 		foreach (GameObject obj in mt.GetRootGameObjects())
 		{
 			if (obj.name != "PauseMenu")
@@ -93,7 +94,8 @@ public class GameController : MonoBehaviour
     {
 		SceneManager.UnloadSceneAsync("spiderScene");
 
-		Scene mt = SceneManager.GetSceneByName("Level1");
+		Scene mt = SceneManager.GetActiveScene();
+		// Scene mt = SceneManager.GetSceneByName("Level1");
 		foreach (GameObject obj in mt.GetRootGameObjects())
 		{
 			obj.SetActive(true);

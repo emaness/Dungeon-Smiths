@@ -40,7 +40,7 @@ public class MinecartMove : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
         if (hit.collider != null)
         {
-            float step = 130.0f * Time.deltaTime;
+            float step = 60.0f * Time.deltaTime;
             Vector2 target = new Vector2(988.3f, -4.6f);
             m_Rigidbody.position = Vector2.MoveTowards(m_Rigidbody.position, target, step);
             
