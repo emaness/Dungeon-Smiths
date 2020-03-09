@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Minecart Game/Scenes/Minecart Game.unity
     guid: 2e4153a9bd9295747902f58b30756ef3
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: e913e82fd1b064db38911a66d0dea34a
+  - enabled: 1
+    path: Assets/KnightGame/Scenes/KnightScene.unity
+    guid: 3da72a41b0ab7a24aae8c588f0c2b3ac
   m_configObjects: {}

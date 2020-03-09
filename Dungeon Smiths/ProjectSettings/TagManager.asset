@@ -29,10 +29,13 @@ TagManager:
   - Snake
   - Gorilla
   - KnightScene
+  - blood
+  - KeyPart
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
+  - 
   - Water
   - UI
   - 
