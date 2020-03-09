@@ -26,6 +26,7 @@ TagManager:
   - Rock
   - SkeletonWeakPoint
   - EndLevel1Rock
+  - KnightScene
   layers:
   - Default
   - TransparentFX

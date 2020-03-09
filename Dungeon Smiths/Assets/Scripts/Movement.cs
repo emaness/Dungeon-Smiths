@@ -65,8 +65,11 @@ public class Movement : MonoBehaviour
         {
             scene = "CaveIn";
         }
-
-        if (scene != null)
+		else if (other.gameObject.CompareTag("KnightScene"))
+		{
+			scene = "KnightScene";
+		}
+		if (scene != null)
         {
             Destroy(other.gameObject);
             moveStick.Reset();
