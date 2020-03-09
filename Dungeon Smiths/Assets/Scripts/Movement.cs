@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Movement : MonoBehaviour
     public Joystick moveStick;
     public Joystick camStick;
     private Rigidbody rigid;
+
+    public Text keyText = null;
+
     //private float moveSpeed = 10.0f;
     //private float camSpeed = 100.0f;
 
@@ -76,7 +80,15 @@ public class Movement : MonoBehaviour
             scene = "Snake";
         }
 
-		if (scene != null)
+        if (other.gameObject.CompareTag("KeyPart"))
+        {
+            int count = int.Parse(keyText.text.Substring(6, 1));
+            ++count;
+            keyText.text = "Keys: " + count + "/5";
+            Destroy(other.gameObject);
+        }
+
+        if (scene != null)
         {
             Destroy(other.gameObject);
             moveStick.Reset();
