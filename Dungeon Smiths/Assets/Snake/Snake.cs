@@ -11,7 +11,7 @@ public class Snake : MonoBehaviour{
 	List<Transform> tail = new List<Transform>();
 	bool ate = false;
 	bool isDied = false;
-	int tailLength = 5;
+	int tailLength = 2;
 	public GameObject tailPrefab;
     // Start is called before the first frame update
     void Start(){

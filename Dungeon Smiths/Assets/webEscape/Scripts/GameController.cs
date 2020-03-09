@@ -28,8 +28,7 @@ public class GameController : MonoBehaviour
 
 		SceneManager.UnloadSceneAsync("SpiderScene");
 
-		Scene mt = SceneManager.GetActiveScene();
-		// Scene mt = SceneManager.GetSceneByName("Level1");
+		Scene mt = SceneManager.GetSceneByName("Level1");
 		foreach (GameObject obj in mt.GetRootGameObjects())
 		{
 			if (obj.name != "PauseMenu")
@@ -42,9 +41,9 @@ public class GameController : MonoBehaviour
 	private IEnumerator DoRestart()
 	{
 		yield return new WaitForSeconds(2.5f);
-		SceneManager.UnloadSceneAsync("webEscape").completed += e =>
+		SceneManager.UnloadSceneAsync("spiderScene").completed += e =>
 		{
-			SceneManager.LoadScene("webEscape", LoadSceneMode.Additive);
+			SceneManager.LoadScene("spiderScene", LoadSceneMode.Additive);
 		};
 	}
 	void Update()
@@ -95,7 +94,6 @@ public class GameController : MonoBehaviour
 		SceneManager.UnloadSceneAsync("spiderScene");
 
 		Scene mt = SceneManager.GetActiveScene();
-		// Scene mt = SceneManager.GetSceneByName("Level1");
 		foreach (GameObject obj in mt.GetRootGameObjects())
 		{
 			obj.SetActive(true);
