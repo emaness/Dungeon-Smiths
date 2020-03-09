@@ -28,11 +28,11 @@ TagManager:
   - EndLevel1Rock
   - Snake
   - Gorilla
+  - KnightScene
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
   - Water
   - UI
   - 
