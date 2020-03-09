@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.CompareTag("Rock"))
         {
             Debug.Log("player hit rock");
-            this.DoTryAgain();
+            StartCoroutine("DoTryAgain");
         }
     }
 
@@ -65,11 +65,13 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DoTryAgain()
     {
         Debug.Log("Doing Try again");
-        Destroy(character);
+        //Destroy(character);
+        character.GetComponent<Renderer>().material.SetColor("_Color", Color.clear);
         GameOver.gameObject.SetActive(true);
 		//TryAgain.gameObject.SetActive(true);
-        SceneManager.LoadScene("CaveIn");
+        //SceneManager.LoadScene("CaveIn");
         yield return new WaitForSeconds(2.5f);
+        //SceneManager.LoadScene("CaveIn");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
@@ -90,12 +92,12 @@ public class PlayerController : MonoBehaviour
         TimeElapsed += Time.deltaTime;
         if(TimeElapsed >= 9.0f)
 		{
-            this.DoWin();
+            StartCoroutine("DoWin");
             //Win.gameObject.SetActive(true);
 
-            
+
             //SceneManager.LoadScene("Level 2");
-            
+
             //// SceneManager.UnloadSceneAsync("Level1");
             //// SceneManager.UnloadSceneAsync("CaveIn");
             //return;

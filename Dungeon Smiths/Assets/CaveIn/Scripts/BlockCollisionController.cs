@@ -14,6 +14,7 @@ public class BlockCollisionController : MonoBehaviour
         //Debug.Log("Hit character");
         if (collider.gameObject.CompareTag("Player"))
         {
+            GetComponent <AudioSource>().Play();
             //BlockController.SendMessage("DoLose");
             //Debug.Log("with tag Player");
 
