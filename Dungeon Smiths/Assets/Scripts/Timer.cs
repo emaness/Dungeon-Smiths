@@ -51,19 +51,101 @@ public class Timer : MonoBehaviour
             //on both the minigame type and the amount of time taken in that game
             if (loadedScenes[1] == "FireGame")
             {
-                if (timeInScene <= 10.0f)
+                if (timeInScene <= 20.0f)
                 {
-                    totalSeconds += 30.0f;
+                    totalSeconds += 15.0f;
                 }
-                else if (timeInScene <= 20.0f)
-                {
-                    totalSeconds += 20.0f;
-                }
-                else
+                else if (timeInScene <= 35.0f)
                 {
                     totalSeconds += 10.0f;
                 }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
             }
+            else if (loadedScenes[1] == "TileMatchingGame")
+            {
+                if (timeInScene <= 30.0f)
+                {
+                    totalSeconds += 15.0f;
+                }
+                else if (timeInScene <= 60.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+            else if (loadedScenes[1] == "Minecart Game")
+            {
+                if (timeInScene <= 30.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+            else if (loadedScenes[1] == "RockThrowing")
+            {
+                if (timeInScene <= 15.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+            else if (loadedScenes[1] == "spiderScene")
+            {
+                if (timeInScene <= 20.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+            else if (loadedScenes[1] == "FireDragon")
+            {
+                if (timeInScene <= 40.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+            else if (loadedScenes[1] == "KnightScene")
+            {
+                if (timeInScene <= 15.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+            else if (loadedScenes[1] == "Snake")
+            {
+                if (timeInScene <= 30.0f)
+                {
+                    totalSeconds += 10.0f;
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                }
+            }
+
             //if (loadedScenes[1] == "whatever minigame you want")
             //Add x amount of time, or add time based on time spent (timeInScene)
             //if it's pause menu, ignore- do not affect game with pausing

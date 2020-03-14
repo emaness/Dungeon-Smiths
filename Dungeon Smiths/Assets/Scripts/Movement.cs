@@ -13,9 +13,6 @@ public class Movement : MonoBehaviour
 
     public Text keyText = null;
 
-    //private float moveSpeed = 10.0f;
-    //private float camSpeed = 100.0f;
-
     // Start is called before the first frame update
     void Start()
     {

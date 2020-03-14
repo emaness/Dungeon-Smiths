@@ -23,7 +23,6 @@ public class FallIntoPit : MonoBehaviour
         {
             gameIsSolo = true;
         }
-        print(gameIsSolo);
     }
 
     // Update is called once per frame
@@ -34,6 +33,13 @@ public class FallIntoPit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Vector3 temp = new Vector3();
+        temp.x = -965.55f;
+        temp.y = -8.52f;
+        temp.z = gameObj.transform.position.z;
+        gameObj.transform.position = temp;
+
+        /*
         if (!gameIsSolo)
         {
             SceneManager.UnloadSceneAsync("Minecart Game").completed += e =>
@@ -45,5 +51,6 @@ public class FallIntoPit : MonoBehaviour
         {
             SceneManager.LoadScene("Minecart Game");
         }
+        */
     }
 }
