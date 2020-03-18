@@ -27,11 +27,13 @@ public class knightGameController : MonoBehaviour
 
 	private IEnumerator DoWin()
 	{
+		YouWin.gameObject.SetActive(true);
+
 		yield return new WaitForSeconds(2.5f);
 
 		SceneManager.UnloadSceneAsync("KnightScene");
 
-		Scene mt = SceneManager.GetSceneByName("Level 2");
+		Scene mt = SceneManager.GetActiveScene();
 		foreach (GameObject obj in mt.GetRootGameObjects())
 		{
 			if (obj.name != "PauseMenu")
@@ -46,7 +48,7 @@ public class knightGameController : MonoBehaviour
 		if (bloodCount == 0)
 		{
 			//game won
-			YouWin.gameObject.SetActive(true);
+			Destroy(bloodStain.gameObject);
 			StartCoroutine("DoWin");
 		}
 
@@ -75,6 +77,10 @@ public class knightGameController : MonoBehaviour
 				bloodCount--;
 			}
 			
+		}
+		else
+		{
+			rb.velocity = Vector2.zero;
 		}
 		
 	}

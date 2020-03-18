@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
 
 		if (Input.GetMouseButtonDown(0) && ballCount > 0)
 		{
-			if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y > 6)
+			if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y > 5.3)
 			{
 				balls[ballCount - 1].transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				Vector3 pos = (balls[ballCount - 1].transform.position);
