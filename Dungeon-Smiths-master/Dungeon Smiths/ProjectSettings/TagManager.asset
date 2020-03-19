@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Fireball
+  - Fire
+  - FireObstacle
+  - Hose
+  - WaterDroplet
+  - TileMatchingCube
+  - LampControl
+  - Mineable
+  - Skeleton
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 4087751323
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Water
+    uniqueID: 764788591
+    locked: 0
+  - name: Hose
+    uniqueID: 1487459143
+    locked: 0
+  - name: Fire
+    uniqueID: 1145090201
+    locked: 0
+  - name: SlingshotBack
+    uniqueID: 2585803253
+    locked: 0
+  - name: Rock
+    uniqueID: 3156293743
+    locked: 0
+  - name: SlingshotFront
+    uniqueID: 497594455
+    locked: 0
