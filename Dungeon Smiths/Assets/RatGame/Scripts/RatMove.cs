@@ -15,7 +15,8 @@ public class RatMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 vec = new Vector3(5.0f, 0.0f, 5.0f);
-        m_Rigidbody.AddRelativeForce(vec);
+        float step = 25.0f * Time.deltaTime;
+        Vector3 target = new Vector3(10.0f, 10.0f, 0.0f);
+        m_Rigidbody.position = Vector3.MoveTowards(m_Rigidbody.position, target, step);
     }
 }
