@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     public Joystick moveStick;
     public Joystick camStick;
     private Rigidbody rigid;
+	public GameObject keyDoors;
 
     public Text keyText = null;
 
@@ -83,6 +84,10 @@ public class Movement : MonoBehaviour
             ++count;
             keyText.text = "Keys: " + count + "/5";
             Destroy(other.gameObject);
+			if(count == 5)
+			{
+				Destroy(keyDoors.gameObject);
+			}
         }
 
         if (scene != null)
