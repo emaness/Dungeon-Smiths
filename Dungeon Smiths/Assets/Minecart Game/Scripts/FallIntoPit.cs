@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class FallIntoPit : MonoBehaviour
 {
     public GameObject gameObj;
-    private bool gameIsSolo = false;
+    //private bool gameIsSolo = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +19,12 @@ public class FallIntoPit : MonoBehaviour
             loadedScenes[i] = SceneManager.GetSceneAt(i);
         }
 
+        /*
         if (loadedScenes[0].name == "Minecart Game")
         {
             gameIsSolo = true;
         }
+        */
     }
 
     // Update is called once per frame
