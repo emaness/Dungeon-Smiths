@@ -11,6 +11,13 @@ public class TrapManager : MonoBehaviour
     public GameObject canvas;
     public Text trapText;
     public int numOfTraps = 5;
+
+    public GameObject fire;
+    public GameObject rock;
+    public GameObject pit;
+    public GameObject water;
+    public GameObject bomb;
+
     private string[,] board = new string[3, 5];
     private Transform[,] ratChildren = new Transform[3, 5];
     private Transform[,] buttonList = new Transform[3, 5];
@@ -133,11 +140,17 @@ public class TrapManager : MonoBehaviour
     {
         numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+
         for (int i = 0; i < 3; i++)
         {
-            board[i, y] = "Done";
-            ratChildren[i, y].gameObject.SetActive(false);
-            buttonList[i, y].gameObject.SetActive(false);
+            if (board[i, y] != "Done")
+            {
+                board[i, y] = "Done";
+                GameObject newFire = Instantiate(fire, ratChildren[i, y].position, Quaternion.identity);
+                newFire.transform.localScale += new Vector3(100.0f, 100.0f, 100.0f);
+                ratChildren[i, y].gameObject.SetActive(false);
+                buttonList[i, y].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -151,9 +164,12 @@ public class TrapManager : MonoBehaviour
             {
                 if (Mathf.Abs(x - i) + Mathf.Abs(y - j) <= 1)
                 {
-                    board[i, j] = "Done";
-                    ratChildren[i, j].gameObject.SetActive(false);
-                    buttonList[i, j].gameObject.SetActive(false);
+                    if (board[i, j] != "Done")
+                    {
+                        board[i, j] = "Done";
+                        ratChildren[i, j].gameObject.SetActive(false);
+                        buttonList[i, j].gameObject.SetActive(false);
+                    }
                 }
             }
         }
@@ -163,9 +179,12 @@ public class TrapManager : MonoBehaviour
     {
         numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
-        board[x, y] = "Done";
-        ratChildren[x, y].gameObject.SetActive(false);
-        buttonList[x, y].gameObject.SetActive(false);
+        if (board[x, y] != "Done")
+        {
+            board[x, y] = "Done";
+            ratChildren[x, y].gameObject.SetActive(false);
+            buttonList[x, y].gameObject.SetActive(false);
+        }
     }
 
     private void trapWater(int x, int y)
@@ -174,9 +193,12 @@ public class TrapManager : MonoBehaviour
         trapText.text = "Traps Remaining: " + numOfTraps;
         for (int i = 0; i < 5; i++)
         {
-            board[x, i] = "Done";
-            ratChildren[x, i].gameObject.SetActive(false);
-            buttonList[x, i].gameObject.SetActive(false);
+            if (board[x, i] != "Done")
+            {
+                board[x, i] = "Done";
+                ratChildren[x, i].gameObject.SetActive(false);
+                buttonList[x, i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -188,9 +210,12 @@ public class TrapManager : MonoBehaviour
         {
             for (int j = 0; j < 5; j++)
             {
-                board[i, j] = "Done";
-                ratChildren[i, j].gameObject.SetActive(false);
-                buttonList[i, j].gameObject.SetActive(false);
+                if (board[i, j] != "Done")
+                {
+                    board[i, j] = "Done";
+                    ratChildren[i, j].gameObject.SetActive(false);
+                    buttonList[i, j].gameObject.SetActive(false);
+                }
             }
         }
     }

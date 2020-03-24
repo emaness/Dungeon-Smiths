@@ -38207,6 +38207,11 @@ MonoBehaviour:
   canvas: {fileID: 1592169924}
   trapText: {fileID: 298301397}
   numOfTraps: 5
+  fire: {fileID: 8803224524605878130, guid: 82764e36bd67f496ebb5d6a9982a40a3, type: 3}
+  rock: {fileID: 0}
+  pit: {fileID: 0}
+  water: {fileID: 0}
+  bomb: {fileID: 0}
 --- !u!4 &1412520686
 Transform:
   m_ObjectHideFlags: 0
