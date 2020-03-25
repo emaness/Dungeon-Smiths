@@ -31,6 +31,7 @@ TagManager:
   - KnightScene
   - blood
   - KeyPart
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX

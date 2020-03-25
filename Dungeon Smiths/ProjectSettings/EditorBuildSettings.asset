@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CaveIn/Scenes/CaveIn.unity
     guid: 92fb9b2a9c1f145c29422854232257b5
+  - enabled: 1
+    path: Assets/RatGame/Scenes/RatGame.unity
+    guid: 20ceab29618d7424583c8dbfca580ee2
   m_configObjects: {}
