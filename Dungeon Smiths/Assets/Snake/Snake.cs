@@ -108,11 +108,13 @@ public class Snake : MonoBehaviour{
     void OnTriggerEnter2D(Collider2D coll) {
     // Food?
 	    if (coll.name.StartsWith("FoodPrefab")) {
-	        // Get longer in next Move call
-	        ate = true;
-	       
-	        // Remove the Food
-	        Destroy(coll.gameObject);
+			// Make collision sound
+			GetComponent<AudioSource>().Play();
+			// Get longer in next Move call
+			ate = true;
+			
+			// Remove the Food
+			Destroy(coll.gameObject);
 	    }
 	    // Collided with Tail or Border
 	    else {

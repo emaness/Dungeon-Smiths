@@ -112,6 +112,7 @@ public class sceneController : MonoBehaviour
 		if(firstCard.id == secondCard.id)
 		{
 			yield return new WaitForSeconds(.5f);
+			GetComponent<AudioSource>().Play();
 			Destroy(firstCard.gameObject);
 			Destroy(secondCard.gameObject);
 			numCards--;

@@ -16,6 +16,7 @@ public class spongeController : MonoBehaviour
 		if (col.gameObject.tag == "blood")
 		{
 			gc.hitsOnStain++;
+			GetComponent<AudioSource>().Play();
 		}
 	}
 	// Update is called once per frame
