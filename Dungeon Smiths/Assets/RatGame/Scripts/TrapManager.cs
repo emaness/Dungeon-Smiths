@@ -11,36 +11,38 @@ public class TrapManager : MonoBehaviour
     public GameObject canvas;
     public Text trapText;
     public int numOfTraps = 5;
+    public Vector2[] coordinates = new Vector2[15];
 
-    public GameObject fire;
-    public GameObject rock;
-    public GameObject pit;
-    public GameObject water;
-    public GameObject bomb;
+    public GameObject trap1obj; //fire
+    public GameObject trap2obj; //rock
+    public GameObject trap3obj; //pit
+    public GameObject trap4obj; //water
+    public GameObject trap5obj; //bomb
 
     private string[,] board = new string[3, 5];
     private Transform[,] ratChildren = new Transform[3, 5];
     private Transform[,] buttonList = new Transform[3, 5];
+    private Vector3[,] coordinatesList = new Vector3[3, 5];
     private bool gameIsSolo = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        board[0, 0] = "Fire";
-        board[0, 1] = "Pit";
-        board[0, 2] = "Rock";
-        board[0, 3] = "Pit";
-        board[0, 4] = "Fire";
-        board[1, 0] = "Water";
-        board[1, 1] = "Pit";
-        board[1, 2] = "Bomb";
-        board[1, 3] = "Pit";
-        board[1, 4] = "Water";
-        board[2, 0] = "Fire";
-        board[2, 1] = "Pit";
-        board[2, 2] = "Rock";
-        board[2, 3] = "Pit";
-        board[2, 4] = "Fire";
+        board[0, 0] = "trap1";
+        board[0, 1] = "trap3";
+        board[0, 2] = "trap2";
+        board[0, 3] = "trap3";
+        board[0, 4] = "trap1";
+        board[1, 0] = "trap4";
+        board[1, 1] = "trap3";
+        board[1, 2] = "trap5";
+        board[1, 3] = "trap3";
+        board[1, 4] = "trap4";
+        board[2, 0] = "trap1";
+        board[2, 1] = "trap3";
+        board[2, 2] = "trap2";
+        board[2, 3] = "trap3";
+        board[2, 4] = "trap1";
 
         int countLoaded = SceneManager.sceneCount;
         Scene[] loadedScenes = new Scene[countLoaded];
@@ -68,6 +70,17 @@ public class TrapManager : MonoBehaviour
             int x = (int)char.GetNumericValue(buttonName[8]);
             int y = (int)char.GetNumericValue(buttonName[10]);
             buttonList[x, y] = button;
+        }
+
+        int k = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                Vector2 coord = coordinates[k];
+                coordinatesList[i, j] = new Vector3(coord.x, coord.y, 1.4f);
+                k++;
+            }
         }
     }
 
@@ -114,50 +127,52 @@ public class TrapManager : MonoBehaviour
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
         int x = (int)char.GetNumericValue(buttonName[8]);
         int y = (int)char.GetNumericValue(buttonName[10]);
-        if (board[x, y] == "Fire") //Removal in all in same column
+        if (board[x, y] == "trap1") //Removal in all in same column
         {
-            trapFire(x, y);
+            trap1(x, y);
         }
-        else if (board[x, y] == "Rock") //Removal in all neighbors up/down/left/right
+        else if (board[x, y] == "trap2") //Removal in all neighbors up/down/left/right
         {
-            trapRock(x, y);
+            trap2(x, y);
         }
-        else if (board[x, y] == "Pit") //Single removal
+        else if (board[x, y] == "trap3") //Single removal
         {
-            trapPit(x, y);
+            trap3(x, y);
         }
-        else if (board[x, y] == "Water") //Removal in same row
+        else if (board[x, y] == "trap4") //Removal in same row
         {
-            trapWater(x, y);
+            trap4(x, y);
         }
-        else if (board[x, y] == "Bomb") //Removal of everything
+        else if (board[x, y] == "trap5") //Removal of everything
         {
-            trapBomb(x, y);
+            trap5(x, y);
         }
     }
 
-    private void trapFire(int x, int y)
+    private void trap1(int x, int y)
     {
-        numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
 
         for (int i = 0; i < 3; i++)
         {
             if (board[i, y] != "Done")
             {
+                GameObject newTrap = Instantiate(trap1obj, coordinatesList[i, y], Quaternion.identity);
+                newTrap.transform.localScale += new Vector3(25.0f, 25.0f, 25.0f);
+
                 board[i, y] = "Done";
-                GameObject newFire = Instantiate(fire, ratChildren[i, y].position, Quaternion.identity);
-                newFire.transform.localScale += new Vector3(100.0f, 100.0f, 100.0f);
                 ratChildren[i, y].gameObject.SetActive(false);
                 buttonList[i, y].gameObject.SetActive(false);
             }
         }
+        
+        numOfTraps -= 1;
     }
 
-    private void trapRock(int x, int y)
+    private void trap2(int x, int y)
     {
-        numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 5; j++)
@@ -166,6 +181,9 @@ public class TrapManager : MonoBehaviour
                 {
                     if (board[i, j] != "Done")
                     {
+                        GameObject newTrap = Instantiate(trap2obj, coordinatesList[i, j], Quaternion.identity);
+                        newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+
                         board[i, j] = "Done";
                         ratChildren[i, j].gameObject.SetActive(false);
                         buttonList[i, j].gameObject.SetActive(false);
@@ -173,39 +191,54 @@ public class TrapManager : MonoBehaviour
                 }
             }
         }
+        
+        numOfTraps -= 1;
     }
 
-    private void trapPit(int x, int y)
+    private void trap3(int x, int y)
     {
-        numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+
         if (board[x, y] != "Done")
         {
+            GameObject newTrap = Instantiate(trap3obj, coordinatesList[x, y], Quaternion.identity);
+            newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+
             board[x, y] = "Done";
             ratChildren[x, y].gameObject.SetActive(false);
             buttonList[x, y].gameObject.SetActive(false);
         }
+        
+        numOfTraps -= 1;
     }
 
-    private void trapWater(int x, int y)
+    private void trap4(int x, int y)
     {
-        numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+
         for (int i = 0; i < 5; i++)
         {
             if (board[x, i] != "Done")
             {
+                GameObject newTrap = Instantiate(trap4obj, coordinatesList[x, i], Quaternion.identity);
+                newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+
                 board[x, i] = "Done";
                 ratChildren[x, i].gameObject.SetActive(false);
                 buttonList[x, i].gameObject.SetActive(false);
             }
         }
+        
+        numOfTraps -= 1;
     }
 
-    private void trapBomb(int x, int y)
+    private void trap5(int x, int y)
     {
-        numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+
+        GameObject newTrap = Instantiate(trap5obj, coordinatesList[x, y], Quaternion.identity);
+        newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 5; j++)
@@ -218,5 +251,7 @@ public class TrapManager : MonoBehaviour
                 }
             }
         }
+        
+        numOfTraps -= 1;
     }
 }

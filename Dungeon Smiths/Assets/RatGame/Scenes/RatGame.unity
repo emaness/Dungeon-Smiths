@@ -37136,7 +37136,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -38207,11 +38207,27 @@ MonoBehaviour:
   canvas: {fileID: 1592169924}
   trapText: {fileID: 298301397}
   numOfTraps: 5
-  fire: {fileID: 8803224524605878130, guid: 82764e36bd67f496ebb5d6a9982a40a3, type: 3}
-  rock: {fileID: 0}
-  pit: {fileID: 0}
-  water: {fileID: 0}
-  bomb: {fileID: 0}
+  coordinates:
+  - {x: -81.5, y: 37.9}
+  - {x: -39.7, y: 37.9}
+  - {x: 0, y: 37.9}
+  - {x: 39.7, y: 37.9}
+  - {x: 81.5, y: 37.9}
+  - {x: -81.5, y: 0}
+  - {x: -39.7, y: 0}
+  - {x: 0, y: 0}
+  - {x: 39.7, y: 0}
+  - {x: 81.5, y: 0}
+  - {x: -81.5, y: -37.9}
+  - {x: -39.7, y: -37.9}
+  - {x: 0, y: -37.9}
+  - {x: 39.7, y: -37.9}
+  - {x: 81.5, y: -37.9}
+  trap1obj: {fileID: 100002, guid: 002c8e66c11fe4048a8c3a08b7f0fe74, type: 3}
+  trap2obj: {fileID: 0}
+  trap3obj: {fileID: 0}
+  trap4obj: {fileID: 0}
+  trap5obj: {fileID: 0}
 --- !u!4 &1412520686
 Transform:
   m_ObjectHideFlags: 0
@@ -42813,7 +42829,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1592169930
 RectTransform:
