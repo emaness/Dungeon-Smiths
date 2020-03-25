@@ -129,50 +129,55 @@ public class TrapManager : MonoBehaviour
         int y = (int)char.GetNumericValue(buttonName[10]);
         if (board[x, y] == "trap1") //Removal in all in same column
         {
-            trap1(x, y);
+            StartCoroutine(trap1(x, y));
         }
         else if (board[x, y] == "trap2") //Removal in all neighbors up/down/left/right
         {
-            trap2(x, y);
+            StartCoroutine(trap2(x, y));
         }
         else if (board[x, y] == "trap3") //Single removal
         {
-            trap3(x, y);
+            StartCoroutine(trap3(x, y));
         }
         else if (board[x, y] == "trap4") //Removal in same row
         {
-            trap4(x, y);
+            StartCoroutine(trap4(x, y));
         }
         else if (board[x, y] == "trap5") //Removal of everything
         {
-            trap5(x, y);
+            StartCoroutine(trap5(x, y));
         }
     }
 
-    private void trap1(int x, int y)
+    private IEnumerator trap1(int x, int y)
     {
-        trapText.text = "Traps Remaining: " + numOfTraps;
-
         for (int i = 0; i < 3; i++)
         {
             if (board[i, y] != "Done")
             {
                 GameObject newTrap = Instantiate(trap1obj, coordinatesList[i, y], Quaternion.identity);
                 newTrap.transform.localScale += new Vector3(25.0f, 25.0f, 25.0f);
+            }
+        }
 
+        yield return new WaitForSeconds(1.0f);
+
+        numOfTraps -= 1;
+        trapText.text = "Traps Remaining: " + numOfTraps;
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (board[i, y] != "Done")
+            {
                 board[i, y] = "Done";
                 ratChildren[i, y].gameObject.SetActive(false);
                 buttonList[i, y].gameObject.SetActive(false);
             }
         }
-        
-        numOfTraps -= 1;
     }
 
-    private void trap2(int x, int y)
+    private IEnumerator trap2(int x, int y)
     {
-        trapText.text = "Traps Remaining: " + numOfTraps;
-
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 5; j++)
@@ -183,7 +188,24 @@ public class TrapManager : MonoBehaviour
                     {
                         GameObject newTrap = Instantiate(trap2obj, coordinatesList[i, j], Quaternion.identity);
                         newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+                    }
+                }
+            }
+        }
+        
+        yield return new WaitForSeconds(0.25f);
 
+        numOfTraps -= 1;
+        trapText.text = "Traps Remaining: " + numOfTraps;
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                if (Mathf.Abs(x - i) + Mathf.Abs(y - j) <= 1)
+                {
+                    if (board[i, j] != "Done")
+                    {
                         board[i, j] = "Done";
                         ratChildren[i, j].gameObject.SetActive(false);
                         buttonList[i, j].gameObject.SetActive(false);
@@ -191,53 +213,65 @@ public class TrapManager : MonoBehaviour
                 }
             }
         }
-        
-        numOfTraps -= 1;
     }
 
-    private void trap3(int x, int y)
+    private IEnumerator trap3(int x, int y)
     {
-        trapText.text = "Traps Remaining: " + numOfTraps;
-
         if (board[x, y] != "Done")
         {
             GameObject newTrap = Instantiate(trap3obj, coordinatesList[x, y], Quaternion.identity);
             newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+        }
 
+        yield return new WaitForSeconds(1.0f);
+
+        numOfTraps -= 1;
+        trapText.text = "Traps Remaining: " + numOfTraps;
+
+        if (board[x, y] != "Done")
+        {
             board[x, y] = "Done";
             ratChildren[x, y].gameObject.SetActive(false);
             buttonList[x, y].gameObject.SetActive(false);
         }
-        
-        numOfTraps -= 1;
     }
 
-    private void trap4(int x, int y)
+    private IEnumerator trap4(int x, int y)
     {
+        for (int i = 0; i < 5; i++)
+        {
+            if (board[x, i] != "Done")
+            {
+                GameObject newTrap = Instantiate(trap4obj, coordinatesList[x, i], Quaternion.identity);
+                newTrap.transform.localScale += new Vector3(25.0f, 25.0f, 25.0f);
+            }
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
 
         for (int i = 0; i < 5; i++)
         {
             if (board[x, i] != "Done")
             {
-                GameObject newTrap = Instantiate(trap4obj, coordinatesList[x, i], Quaternion.identity);
-                newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
-
                 board[x, i] = "Done";
                 ratChildren[x, i].gameObject.SetActive(false);
                 buttonList[x, i].gameObject.SetActive(false);
             }
         }
-        
-        numOfTraps -= 1;
     }
 
-    private void trap5(int x, int y)
+    private IEnumerator trap5(int x, int y)
     {
-        trapText.text = "Traps Remaining: " + numOfTraps;
-
         GameObject newTrap = Instantiate(trap5obj, coordinatesList[x, y], Quaternion.identity);
-        newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
+        newTrap.transform.localScale += new Vector3(20.0f, 20.0f, 20.0f);
+
+        yield return new WaitForSeconds(0.25f);
+
+        numOfTraps -= 1;
+        trapText.text = "Traps Remaining: " + numOfTraps;
 
         for (int i = 0; i < 3; i++)
         {
@@ -251,7 +285,5 @@ public class TrapManager : MonoBehaviour
                 }
             }
         }
-        
-        numOfTraps -= 1;
     }
 }

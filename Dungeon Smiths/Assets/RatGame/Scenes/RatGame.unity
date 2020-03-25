@@ -38224,10 +38224,10 @@ MonoBehaviour:
   - {x: 39.7, y: -37.9}
   - {x: 81.5, y: -37.9}
   trap1obj: {fileID: 100002, guid: 002c8e66c11fe4048a8c3a08b7f0fe74, type: 3}
-  trap2obj: {fileID: 0}
-  trap3obj: {fileID: 0}
-  trap4obj: {fileID: 0}
-  trap5obj: {fileID: 0}
+  trap2obj: {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+  trap3obj: {fileID: 100000, guid: 352304b7fbe11f445970df6ae36e6227, type: 3}
+  trap4obj: {fileID: 100000, guid: f8d69af752ffd844c8f3d24cd74f655f, type: 3}
+  trap5obj: {fileID: 100002, guid: 4bf22a1d8d9e7724b9af67921436851d, type: 3}
 --- !u!4 &1412520686
 Transform:
   m_ObjectHideFlags: 0
