@@ -12,12 +12,39 @@ public class Movement : MonoBehaviour
     private Rigidbody rigid;
 	public GameObject keyDoors;
 
+    public bool isCollapsingLevel = false;
+
     public Text keyText = null;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+
+        if(isCollapsingLevel)
+        {
+            StartCoroutine("CollapsingRoutine");
+        }
+    }
+
+    IEnumerator CollapsingRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        var origPos = cam.transform.position;
+
+        for(var i = 0; i != 75; ++i)
+        {
+            cam.transform.position = new Vector3(
+                origPos.x + Random.Range(-0.4f, 0.4f),
+                origPos.y + Random.Range(-0.4f, 0.4f),
+                origPos.z);
+
+            yield return new WaitForSeconds(0.05f);
+        }
+        cam.transform.position = origPos;
+
+        enterMinigame("CaveIn");
     }
 
     // Update is called once per frame
@@ -42,6 +69,21 @@ public class Movement : MonoBehaviour
             cam.transform.Rotate(0, camStick.Horizontal * 3.0f, 0);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         }
+    }
+
+    private void enterMinigame(string sceneName)
+    {
+        moveStick.Reset();
+        camStick.Reset();
+
+        foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
+        {
+            if (obj.name != "CanvasStays" && obj.name != "MenuManager")
+            {
+                obj.SetActive(false);
+            }
+        }
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,17 +135,7 @@ public class Movement : MonoBehaviour
         if (scene != null)
         {
             Destroy(other.gameObject);
-            moveStick.Reset();
-            camStick.Reset();
-
-            foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
-            {
-                if (obj.name != "CanvasStays" && obj.name != "MenuManager")
-                {
-                    obj.SetActive(false);
-                }
-            }
-            SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+            enterMinigame(scene);
         }
     }
 }
