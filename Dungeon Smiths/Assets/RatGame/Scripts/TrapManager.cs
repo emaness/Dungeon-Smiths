@@ -25,24 +25,51 @@ public class TrapManager : MonoBehaviour
     private Vector3[,] coordinatesList = new Vector3[3, 5];
     private bool gameIsSolo = false;
 
+    private string[] randomization = new string[5] { "trap1", "trap2", "trap3", "trap4", "trap5" };
+    private int[] randomizationCount = new int[5] { 0, 0, 0, 0, 0 }; //4, 2, 6, 2, 1
+    private bool unaccepted = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        board[0, 0] = "trap1";
-        board[0, 1] = "trap3";
-        board[0, 2] = "trap2";
-        board[0, 3] = "trap3";
-        board[0, 4] = "trap1";
-        board[1, 0] = "trap4";
-        board[1, 1] = "trap3";
-        board[1, 2] = "trap5";
-        board[1, 3] = "trap3";
-        board[1, 4] = "trap4";
-        board[2, 0] = "trap1";
-        board[2, 1] = "trap3";
-        board[2, 2] = "trap2";
-        board[2, 3] = "trap3";
-        board[2, 4] = "trap1";
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                int index = 0;
+                while (unaccepted)
+                {
+                    index = Random.Range(0, 5);
+                    if (randomizationCount[index] == 4 && index == 0)
+                    {
+                        unaccepted = true;
+                    }
+                    else if (randomizationCount[index] == 2 && index == 1)
+                    {
+                        unaccepted = true;
+                    }
+                    else if (randomizationCount[index] == 6 && index == 2)
+                    {
+                        unaccepted = true;
+                    }
+                    else if (randomizationCount[index] == 2 && index == 3)
+                    {
+                        unaccepted = true;
+                    }
+                    else if (randomizationCount[index] == 1 && index == 4)
+                    {
+                        unaccepted = true;
+                    }
+                    else
+                    {
+                        unaccepted = false;
+                    }
+                }
+                board[i, j] = randomization[index];
+                randomizationCount[index]++;
+                unaccepted = true;
+            }
+        }
 
         int countLoaded = SceneManager.sceneCount;
         Scene[] loadedScenes = new Scene[countLoaded];
@@ -265,7 +292,7 @@ public class TrapManager : MonoBehaviour
 
     private IEnumerator trap5(int x, int y)
     {
-        GameObject newTrap = Instantiate(trap5obj, coordinatesList[x, y], Quaternion.identity);
+        GameObject newTrap = Instantiate(trap5obj, coordinatesList[1, 2], Quaternion.identity);
         newTrap.transform.localScale += new Vector3(20.0f, 20.0f, 20.0f);
 
         yield return new WaitForSeconds(0.25f);
