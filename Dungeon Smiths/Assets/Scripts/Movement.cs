@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     public Joystick camStick;
     private Rigidbody rigid;
 	public GameObject keyDoors;
+	private bool[] isFirstTime;
+	
 
     public bool isCollapsingLevel = false;
 
@@ -19,7 +21,10 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigid = GetComponent<Rigidbody>();
+		isFirstTime = new bool[10];
+		for (int i = 0; i < isFirstTime.Length; i++) { isFirstTime[i] = true; }
+
+		rigid = GetComponent<Rigidbody>();
 
         if(isCollapsingLevel)
         {
@@ -76,7 +81,12 @@ public class Movement : MonoBehaviour
         moveStick.Reset();
         camStick.Reset();
 
-        foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
+		bool needInstruction = getFirstTime(sceneName);
+		int numberOfNeed = 0;
+		if (needInstruction) numberOfNeed = 1;
+		PlayerPrefs.SetInt("isFirstTime", numberOfNeed);
+
+		foreach (GameObject obj in gameObject.scene.GetRootGameObjects())
         {
             if (obj.name != "CanvasStays" && obj.name != "MenuManager")
             {
@@ -119,6 +129,10 @@ public class Movement : MonoBehaviour
         {
             scene = "Snake";
         }
+		else if (other.gameObject.CompareTag("chest"))
+		{
+			scene = "final2Scene";
+		}
 
         if (other.gameObject.CompareTag("KeyPart"))
         {
@@ -136,6 +150,98 @@ public class Movement : MonoBehaviour
         {
             Destroy(other.gameObject);
             enterMinigame(scene);
+			setFirstTime(scene);
         }
     }
+
+	void setFirstTime(string scene)
+	{
+		if (scene.Equals("FireObstacle"))
+		{
+			isFirstTime[0] = false;
+		}
+		else if (scene.Equals("TileMatchingCube"))
+		{
+			isFirstTime[1] = false;
+		}
+		else if (scene.Equals("Minecart"))
+		{
+			isFirstTime[2] = false;
+		}
+		else if (scene.Equals("Skeleton"))
+		{
+			isFirstTime[3] = false;
+		}
+		else if (scene.Equals("Spider"))
+		{
+			isFirstTime[4] = false;
+		}
+		else if (scene.Equals("EndLevel1Rock"))
+		{
+			
+			isFirstTime[5] = false;
+		}
+		else if (scene.Equals("Gorilla"))
+		{
+			isFirstTime[6] = false;
+		}
+		else if (scene.Equals("KnightScene"))
+		{
+			isFirstTime[7] = false;
+		}
+		else if (scene.Equals("Snake"))
+		{
+			isFirstTime[8] = false;
+		}
+		else if (scene.Equals("chest"))
+		{
+			isFirstTime[9] = false;
+		}
+	}
+
+	public bool getFirstTime(string scene)
+	{
+		if (scene.Equals("FireObstacle"))
+		{
+			return isFirstTime[0];
+		}
+		else if (scene.Equals("TileMatchingCube"))
+		{
+			return isFirstTime[1];
+		}
+		else if (scene.Equals("Minecart"))
+		{
+			return isFirstTime[2];
+		}
+		else if (scene.Equals("Skeleton"))
+		{
+			return isFirstTime[3];
+		}
+		else if (scene.Equals("Spider"))
+		{
+			return isFirstTime[4];
+		}
+		else if (scene.Equals("EndLevel1Rock"))
+		{
+
+			return isFirstTime[5];
+		}
+		else if (scene.Equals("Gorilla"))
+		{
+			return isFirstTime[6];
+		}
+		else if (scene.Equals("KnightScene"))
+		{
+			return isFirstTime[7];
+		}
+		else if (scene.Equals("Snake"))
+		{
+			return isFirstTime[8];
+		}
+		else if (scene.Equals("chest"))
+		{
+			return isFirstTime[9];
+		}
+		else return true;
+	}
 }
