@@ -9,6 +9,7 @@ public class knightGameController : MonoBehaviour
 
 	public int bloodCount = 5;
 	[SerializeField] public Text YouWin;
+	public Text instructions;
 	[SerializeField] public GameObject Sponge;
 	[SerializeField] public GameObject bloodStain;
 	public int hitsOnStain = 0;
@@ -18,10 +19,31 @@ public class knightGameController : MonoBehaviour
 	private Rigidbody2D rb;
 	private float moveSpeed = 10f;
 	// Start is called before the first frame update
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 5;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+	}
+
 	void Start()
     {
+		//PlayerPrefs.SetInt("isFirstTime", 1);
 		YouWin.gameObject.SetActive(false);
+		instructions.gameObject.SetActive(false);
 		rb = Sponge.GetComponent<Rigidbody2D>();
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+		}
 
 	}
 

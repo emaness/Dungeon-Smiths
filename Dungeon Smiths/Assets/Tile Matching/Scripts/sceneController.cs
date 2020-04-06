@@ -16,11 +16,25 @@ public class sceneController : MonoBehaviour
 	[SerializeField] public Card originalCard;
 	[SerializeField] public Sprite[] images;
 	[SerializeField] public Text YouWin;
+	public Text instructions;
 	private int numCards = 9;
+
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 3;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+	}
 
 	private void Start()
 	{
 		YouWin.gameObject.SetActive(false);
+		instructions.gameObject.SetActive(false);
+
 		Vector3 startPos = originalCard.transform.position;
 
 		int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7,8,8 };
@@ -51,6 +65,16 @@ public class sceneController : MonoBehaviour
 				card.transform.position = new Vector3(x, y, startPos.z);
 
 			}
+		}
+
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+
 		}
 	}
 

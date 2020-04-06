@@ -11,17 +11,38 @@ public class PlayerController : MonoBehaviour
     public Text GameOver;
 
     public Text Win;
+	public Text instructions;
     private bool Losing;
     private float TimeElapsed;
 
-    void Start()
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 5;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+	}
+
+	void Start()
 	{
         Losing = false;
         GameOver.gameObject.SetActive(false);
+		instructions.gameObject.SetActive(false);
 
         Win.gameObject.SetActive(false);
         TimeElapsed = 0.0f;
-    }
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+		}
+	}
 
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D collider)

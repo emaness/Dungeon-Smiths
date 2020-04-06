@@ -9,6 +9,7 @@ public class gameController : MonoBehaviour
 	[SerializeField] public GameObject[] images;
 	[SerializeField] public Text YouWin;
 	[SerializeField] public Text TryAgain;
+	public Text instructions;
 	private int[] numbersOne = { 0, 1, 2, 3, 4, };
 	private int[] numbersTwo = { 0, 1, 4, 3, 2, 0, 4 };
 	private int[] numbersThree = { 2, 4, 3, 1, 0, 3, 0, 1, 4};
@@ -18,9 +19,22 @@ public class gameController : MonoBehaviour
 	private bool isThree;
 	private bool canPress;
 
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 8;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+		startGame();
+
+	}
 	// Start is called before the first frame update
 	void Start()
     {
+
 		YouWin.gameObject.SetActive(false);
 		TryAgain.gameObject.SetActive(false);
 		numbersOne = ShuffleArray(numbersOne);
@@ -32,7 +46,16 @@ public class gameController : MonoBehaviour
 		isTwo = false;
 		isThree = false;
 		canPress = false;
-		startGame();
+		instructions.gameObject.SetActive(false);
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+		}
+		else { startGame(); }
 
 		
 

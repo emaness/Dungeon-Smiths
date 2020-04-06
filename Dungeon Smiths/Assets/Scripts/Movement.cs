@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		isFirstTime = new bool[10];
+		isFirstTime = new bool[11];
 		for (int i = 0; i < isFirstTime.Length; i++) { isFirstTime[i] = true; }
 
 		rigid = GetComponent<Rigidbody>();
@@ -121,20 +121,22 @@ public class Movement : MonoBehaviour
         } else if(other.gameObject.CompareTag("Gorilla"))
         {
             scene = "FireDragon";
-        }
-        else if (other.gameObject.CompareTag("KnightScene"))
+        }else if (other.gameObject.CompareTag("KnightScene"))
         {
             scene = "KnightScene";
         } else if(other.gameObject.CompareTag("Snake"))
         {
             scene = "Snake";
-        }
-		else if (other.gameObject.CompareTag("chest"))
+        }else if (other.gameObject.CompareTag("Chest"))
 		{
 			scene = "final2Scene";
 		}
+		else if (other.gameObject.CompareTag("Rat"))
+		{
+			scene = "RatGame";
+		}
 
-        if (other.gameObject.CompareTag("KeyPart"))
+		if (other.gameObject.CompareTag("KeyPart"))
         {
             int count = int.Parse(keyText.text.Substring(6, 1));
             ++count;
@@ -197,6 +199,10 @@ public class Movement : MonoBehaviour
 		{
 			isFirstTime[9] = false;
 		}
+		else if (scene.Equals("RatGame"))
+		{
+			isFirstTime[10] = false;
+		}
 	}
 
 	public bool getFirstTime(string scene)
@@ -241,6 +247,10 @@ public class Movement : MonoBehaviour
 		else if (scene.Equals("chest"))
 		{
 			return isFirstTime[9];
+		}
+		else if (scene.Equals("RatGame"))
+		{
+			return isFirstTime[10];
 		}
 		else return true;
 	}
