@@ -15,6 +15,7 @@ public class FireManagerController : MonoBehaviour
 
     public Text YouWin;
     public Image FireBar;
+	public Text instructions;
 
     // represents the health of the overall fire column
     // when the user gets through all the fires they win
@@ -31,17 +32,43 @@ public class FireManagerController : MonoBehaviour
         }
     }
 
-    private void Start()
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 5;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+		SpawnFires();
+	}
+
+	private void Start()
     {
-        YouWin.gameObject.SetActive(false);
-        fireballTimer = FireballInterval;
-        remainingFires = new Queue<FireState>();
-        enqueueFires(200, 100);
-        initialFireCount = remainingFires.Count;
-        SpawnFires();
+		YouWin.gameObject.SetActive(false);
+		instructions.gameObject.SetActive(false);
+		fireballTimer = FireballInterval;
+		remainingFires = new Queue<FireState>();
+		enqueueFires(200, 100);
+		initialFireCount = remainingFires.Count;
+
+		if (PlayerPrefs.GetInt("isFirstTime")==1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+
+		}
+		else {
+			SpawnFires();
+		}
     }
 
-    private void SpawnFires()
+
+	private void SpawnFires()
     {
         int numFires = findFires().Count;
         int numToCreate = Mathf.Min(MaxActiveFires - numFires, remainingFires.Count);

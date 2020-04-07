@@ -8,7 +8,7 @@ public class GameManager :Singleton<GameManager>
 {
     [SerializeField]
     private Text info;
-
+	public Text instructions;
     [SerializeField]
     private GameObject player;
 
@@ -47,12 +47,31 @@ public class GameManager :Singleton<GameManager>
             floor4.Add(g4);
         }
     }
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 5;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+	}
 
-
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
-        OnInit();
+		instructions.gameObject.SetActive(false);
+		//PlayerPrefs.SetInt("isFirstTime", 1);
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+		}
+		OnInit();
     }
 
     // Update is called once per frame

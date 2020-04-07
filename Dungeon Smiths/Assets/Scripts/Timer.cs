@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public float totalSeconds = 600.0f;
+    public GameObject timeAddUI;
     private float timeInScene = 0.0f;
     private Text timeText;
+    private Text timeAddText;
     private int countLoaded = 1;
     private string[] loadedScenes; //This is a 2 sized array containing Level 1/2/3 and a loaded minigame (or no minigame).
 
@@ -16,6 +18,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         timeText = GetComponent<Text>();
+        timeAddText = timeAddUI.GetComponent<Text>();
         loadedScenes = new string[2];
         loadedScenes[0] = SceneManager.GetActiveScene().name;
         loadedScenes[1] = "None";
@@ -54,14 +57,17 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 20.0f)
                 {
                     totalSeconds += 15.0f;
+                    timeAddChange("+15 sec");
                 }
                 else if (timeInScene <= 35.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "TileMatchingGame")
@@ -69,14 +75,17 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 30.0f)
                 {
                     totalSeconds += 15.0f;
+                    timeAddChange("+15 sec");
                 }
                 else if (timeInScene <= 60.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "Minecart Game")
@@ -84,10 +93,12 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 30.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "RockThrowing")
@@ -95,10 +106,12 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 15.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "spiderScene")
@@ -106,10 +119,12 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 20.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "FireDragon")
@@ -117,10 +132,12 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 40.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "KnightScene")
@@ -128,10 +145,12 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 15.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
             else if (loadedScenes[1] == "Snake")
@@ -139,10 +158,30 @@ public class Timer : MonoBehaviour
                 if (timeInScene <= 30.0f)
                 {
                     totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
                 }
                 else
                 {
                     totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
+                }
+            }
+            else if (loadedScenes[1] == "Rat Game")
+            {
+                if (timeInScene <= 15.0f)
+                {
+                    totalSeconds += 15.0f;
+                    timeAddChange("+15 sec");
+                }
+                else if (timeInScene <= 30.0f)
+                {
+                    totalSeconds += 10.0f;
+                    timeAddChange("+10 sec");
+                }
+                else
+                {
+                    totalSeconds += 5.0f;
+                    timeAddChange("+5 sec");
                 }
             }
 
@@ -152,5 +191,18 @@ public class Timer : MonoBehaviour
             timeInScene = 0.0f;
             loadedScenes[1] = "None";
         }
+    }
+
+    void timeAddChange(string timeAdd)
+    {
+        timeAddUI.SetActive(true);
+        print(timeAdd);
+        timeAddText.text = timeAdd;
+        Invoke("DisableText", 3f);
+    }
+
+    void DisableText()
+    {
+        timeAddUI.SetActive(false);
     }
 }

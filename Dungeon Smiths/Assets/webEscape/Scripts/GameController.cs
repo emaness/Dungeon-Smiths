@@ -14,12 +14,35 @@ public class GameController : MonoBehaviour
 	[SerializeField] public Text countText;
 	[SerializeField] public Text YouWin;
 	[SerializeField] public Text TryAgain;
+	[SerializeField] public Text instructions;
+
+	private IEnumerator DoInstruction()
+	{
+		float pauseEndTime = Time.realtimeSinceStartup + 5;
+		while (Time.realtimeSinceStartup < pauseEndTime)
+		{
+			yield return 0;
+		}
+		Time.timeScale = 1f;
+		instructions.gameObject.SetActive(false);
+	}
+
 	void Start()
 	{
 		ballCount = 6;
 		YouWin.gameObject.SetActive(false);
 		TryAgain.gameObject.SetActive(false);
+		instructions.gameObject.SetActive(false);
 		countText.text = "Balls Left: " + ballCount.ToString();
+
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			StartCoroutine("DoInstruction");
+			PlayerPrefs.SetInt("isFirstTime", 0);
+		}
 	}
 
 	private IEnumerator DoWin()
