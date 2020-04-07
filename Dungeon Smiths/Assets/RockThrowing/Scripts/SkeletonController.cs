@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SkeletonController : MonoBehaviour
@@ -15,11 +16,28 @@ public class SkeletonController : MonoBehaviour
     public int InitialHealth;
     public int Health;
 
-    public IEnumerator IdleThenWalk()
+	public Text instructions;
+
+	public IEnumerator IdleThenWalk()
     {
         yield return new WaitForSeconds(0.1f);
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			float pauseEndTime = Time.realtimeSinceStartup + 4;
+			while (Time.realtimeSinceStartup < pauseEndTime)
+			{
+				yield return 0;
+			}
+			Time.timeScale = 1f;
+			instructions.gameObject.SetActive(false);
+			PlayerPrefs.SetInt("isFirstTime", 0);
 
-        var anim = GetComponent<Animator>();
+		}
+
+		var anim = GetComponent<Animator>();
         anim.SetTrigger(walkingHash);
     }
 
@@ -60,8 +78,9 @@ public class SkeletonController : MonoBehaviour
         Health = InitialHealth;
         
         SetUpWeakpoints();
-
-        StartCoroutine("IdleThenWalk");
+		//PlayerPrefs.SetInt("isFirstTime", 1);
+		instructions.gameObject.SetActive(false);
+		StartCoroutine("IdleThenWalk");
     }
 
     void Update()
