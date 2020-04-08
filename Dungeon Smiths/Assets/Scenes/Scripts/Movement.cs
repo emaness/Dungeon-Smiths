@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     private Rigidbody rigid;
 	public GameObject keyDoors;
 	private bool[] isFirstTime;
+	public int numKeys;
 	
 
     public bool isCollapsingLevel = false;
@@ -34,7 +35,7 @@ public class Movement : MonoBehaviour
 
     IEnumerator CollapsingRoutine()
     {
-        yield return new WaitForSeconds(5.0f);
+		/*yield return new WaitForSeconds(5.0f);
 
         var origPos = cam.transform.position;
 
@@ -49,7 +50,8 @@ public class Movement : MonoBehaviour
         }
         cam.transform.position = origPos;
 
-        enterMinigame("CaveIn");
+        enterMinigame("CaveIn");*/
+		yield return null;
     }
 
     // Update is called once per frame
@@ -140,9 +142,9 @@ public class Movement : MonoBehaviour
         {
             int count = int.Parse(keyText.text.Substring(6, 1));
             ++count;
-            keyText.text = "Keys: " + count + "/5";
+            keyText.text = "Keys: " + count + "/" + numKeys;
             Destroy(other.gameObject);
-			if(count == 5)
+			if(count == numKeys)
 			{
 				Destroy(keyDoors.gameObject);
 			}
