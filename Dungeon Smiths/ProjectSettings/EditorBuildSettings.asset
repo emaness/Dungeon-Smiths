@@ -5,52 +5,55 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: b31c2e36519f4cc4b94e26aee22b43ef
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PauseMenu.unity
     guid: 1340f633953d3ff45ba3a1980138bd4c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: ccbc7956fb133d14e88d8539c920943b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/RockThrowing/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tile Matching/Scenes/TileMatchingGame.unity
     guid: 6617b440655ee714e818e6b8c70d975f
-  - enabled: 1
+  - enabled: 0
     path: Assets/FireGame/Scenes/FireGame.unity
     guid: 2685c4259752949e581f94a4ae248240
   - enabled: 0
-    path: Assets/RockThrowing/Scenes/RockThrowing.unity
-    guid: ceaae7e6396b1451b977e6281be6eae1
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/webEscape/Scenes/spiderScene.unity
     guid: 43fa043824bbfaa4cb9a597ea757c1f8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Minecart Game/Scenes/Minecart Game.unity
     guid: 2e4153a9bd9295747902f58b30756ef3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level 2.unity
     guid: e913e82fd1b064db38911a66d0dea34a
-  - enabled: 1
+  - enabled: 0
     path: Assets/KnightGame/Scenes/KnightScene.unity
     guid: 3da72a41b0ab7a24aae8c588f0c2b3ac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Snake/Scenes/Snake.unity
     guid: fb78bd52e94844600b08d33e8998a043
-  - enabled: 1
+  - enabled: 0
     path: Assets/FireDragon/Scenes/FireDragon.unity
     guid: 24822078adeb9a64fba19efe18f6fec1
-  - enabled: 1
+  - enabled: 0
     path: Assets/CaveIn/Scenes/CaveIn.unity
     guid: 92fb9b2a9c1f145c29422854232257b5
-  - enabled: 1
+  - enabled: 0
     path: Assets/RatGame/Scenes/RatGame.unity
     guid: 20ceab29618d7424583c8dbfca580ee2
+  - enabled: 1
+    path: Assets/Level2BossJumpKing/Scenes/JumpKing.unity
+    guid: 34a29e107699c0148bdc86b949e1e3b4
   m_configObjects: {}
