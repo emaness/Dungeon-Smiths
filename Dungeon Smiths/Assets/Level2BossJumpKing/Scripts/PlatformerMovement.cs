@@ -21,11 +21,11 @@ public class PlatformerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkWalk();
-        checkWalk2();
         //1.0f is the distance from ground, 1 << 9 is a bitmask to check colliders with only platforms (horizontal)
         //1 << 8 is a bitmask to check colliders with only walls (vertical)
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, 1 << 9);
+        checkWalk(hit);
+        checkWalk2(hit);
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.right, 1.0f, 1 << 8);
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.left, 1.0f, 1 << 8);
         jumpButton.onClick.RemoveAllListeners();
@@ -57,7 +57,7 @@ public class PlatformerMovement : MonoBehaviour
         rigid.AddForce(gravityVector * Time.deltaTime, ForceMode2D.Impulse);
     }
 
-    private void checkWalk()
+    private void checkWalk(RaycastHit2D hit)
     {
         float speed = Input.GetAxis("Horizontal") * 15.0f * Time.deltaTime;
         if (speed == 0)
@@ -69,18 +69,32 @@ public class PlatformerMovement : MonoBehaviour
             Vector3 rotate = new Vector3(0, 180, 0);
             transform.eulerAngles = rotate;
             transform.Translate(-speed, 0, 0);
-            anim.SetTrigger("Walk");
+            if (hit.collider != null)
+            {
+                anim.SetTrigger("Walk");
+            }
+            else
+            {
+                anim.SetTrigger("Idle");
+            }
         }
         else if (speed > 0)
         {
             Vector3 rotate = new Vector3(0, 0, 0);
             transform.eulerAngles = rotate;
             transform.Translate(speed, 0, 0);
-            anim.SetTrigger("Walk");
+            if (hit.collider != null)
+            {
+                anim.SetTrigger("Walk");
+            }
+            else
+            {
+                anim.SetTrigger("Idle");
+            }
         }
     }
 
-    private void checkWalk2()
+    private void checkWalk2(RaycastHit2D hit)
     {
         float speed = moveStick.Horizontal * 15.0f * Time.deltaTime;
         if (speed == 0)
@@ -92,14 +106,28 @@ public class PlatformerMovement : MonoBehaviour
             Vector3 rotate = new Vector3(0, 180, 0);
             transform.eulerAngles = rotate;
             transform.Translate(-speed, 0, 0);
-            anim.SetTrigger("Walk");
+            if (hit.collider != null)
+            {
+                anim.SetTrigger("Walk");
+            }
+            else
+            {
+                anim.SetTrigger("Idle");
+            }
         }
         else if (speed > 0)
         {
             Vector3 rotate = new Vector3(0, 0, 0);
             transform.eulerAngles = rotate;
             transform.Translate(speed, 0, 0);
-            anim.SetTrigger("Walk");
+            if (hit.collider != null)
+            {
+                anim.SetTrigger("Walk");
+            }
+            else
+            {
+                anim.SetTrigger("Idle");
+            }
         }
     }
 
