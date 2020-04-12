@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlatformerMovement : MonoBehaviour
 {
@@ -161,6 +162,14 @@ public class PlatformerMovement : MonoBehaviour
             rigid.AddForce(bounce_force);
             Vector3 rotate = new Vector3(0, 0, 0);
             transform.eulerAngles = rotate;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene("Level 3");
         }
     }
 }
