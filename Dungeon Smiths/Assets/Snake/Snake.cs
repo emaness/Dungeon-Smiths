@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 
 public class Snake : MonoBehaviour{
@@ -13,20 +14,76 @@ public class Snake : MonoBehaviour{
 	bool isDied = false;
 	int tailLength = 2;
 	public GameObject tailPrefab;
-    // Start is called before the first frame update
-    void Start(){
-		var prevActive = SceneManager.GetActiveScene();
-		SceneManager.SetActiveScene(SceneManager.GetSceneByName("Snake"));
-    	for(int i = tailLength; i>0; i--){
-			Vector2 v = transform.position;
-			v.x = v.x - i;
-			GameObject g =(GameObject)Instantiate(tailPrefab,
-		                                              v,
-		                                              Quaternion.identity);
-			tail.Insert(0, g.transform);
+	public Text instructions;
+
+
+
+	public IEnumerator DoInstructions()
+	{
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+			print("entered isfirst time");
+			instructions.gameObject.SetActive(true);
+			Time.timeScale = 0.0f;
+			float pauseEndTime = Time.realtimeSinceStartup + 4;
+			while (Time.realtimeSinceStartup < pauseEndTime)
+			{
+				yield return 0;
+			}
+			Time.timeScale = 1f;
+			instructions.gameObject.SetActive(false);
+			PlayerPrefs.SetInt("isFirstTime", 0);
+
+
+			var prevActive = SceneManager.GetActiveScene();
+			SceneManager.SetActiveScene(SceneManager.GetSceneByName("Snake"));
+			for (int i = tailLength; i > 0; i--)
+			{
+				Vector2 v = transform.position;
+				v.x = v.x - i;
+				GameObject g = (GameObject)Instantiate(tailPrefab,
+														  v,
+														  Quaternion.identity);
+				tail.Insert(0, g.transform);
+			}
+
+			InvokeRepeating("Move", 0.1f, 0.1f);
+			SceneManager.SetActiveScene(prevActive);
+
 		}
-        InvokeRepeating("Move", 0.1f, 0.1f);
-		SceneManager.SetActiveScene(prevActive);
+
+	}
+
+	// Start is called before the first frame update
+	void Start(){
+
+		//PlayerPrefs.SetInt("isFirstTime", 0);
+
+		instructions.gameObject.SetActive(false);
+
+		if (PlayerPrefs.GetInt("isFirstTime") == 1)
+		{
+
+			StartCoroutine("DoInstructions");
+		}
+		else
+		{
+			var prevActive = SceneManager.GetActiveScene();
+			SceneManager.SetActiveScene(SceneManager.GetSceneByName("Snake"));
+			for (int i = tailLength; i > 0; i--)
+			{
+				Vector2 v = transform.position;
+				v.x = v.x - i;
+				GameObject g = (GameObject)Instantiate(tailPrefab,
+														  v,
+														  Quaternion.identity);
+				tail.Insert(0, g.transform);
+			}
+
+			InvokeRepeating("Move", 0.1f, 0.1f);
+			SceneManager.SetActiveScene(prevActive);
+		}
+
     }
 
     // Update is called once per frame
