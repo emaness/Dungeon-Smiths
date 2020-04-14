@@ -8,6 +8,11 @@ public class PlatformerMovement : MonoBehaviour
 {
     public Joystick moveStick;
     public Button jumpButton;
+
+    public AudioClip bounceAudio;
+    public AudioClip winAudio;
+    public AudioSource audio;
+
     private Rigidbody2D rigid;
     private Animator anim;
     private bool inAir = false;
@@ -17,6 +22,7 @@ public class PlatformerMovement : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +44,7 @@ public class PlatformerMovement : MonoBehaviour
             //THIS IS FOR PLAYTESTING LEVELS USING MORE JUMP
             //FORCE THAN INTENDED FOR THE PLAYER.
             inAir = true;
+            //audio.PlayOneShot(bounceAudio);
             jumpButton.onClick.AddListener(() => checkJump2());
             checkJump();
         }
@@ -47,11 +54,15 @@ public class PlatformerMovement : MonoBehaviour
             {
                 checkBounce(1); //right
                 inAir = false;
+                audio.PlayOneShot(bounceAudio);          
+                //GetComponent<AudioSource>().Play();
             }
             if (hit2.collider != null)
             {
                 checkBounce(2); //left
                 inAir = false;
+                audio.PlayOneShot(bounceAudio);
+                //GetComponent<AudioSource>().Play();
             }
         }
         Vector3 gravityVector = new Vector3(0, -4.31f, 0);
@@ -169,6 +180,7 @@ public class PlatformerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
+            audio.PlayOneShot(winAudio);
             SceneManager.LoadScene("Level 3");
         }
     }
