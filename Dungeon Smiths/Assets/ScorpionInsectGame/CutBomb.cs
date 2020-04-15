@@ -6,6 +6,7 @@ public class CutBomb : MonoBehaviour
 {
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.tag == "Cut") {
+			//GetComponent<AudioSource>().Play();
 			Destroy (this.gameObject);
 			GameObject lifeText = GameObject.Find ("LifeText");
  			lifeText.GetComponent<Lives> ().decreaseLives(1);

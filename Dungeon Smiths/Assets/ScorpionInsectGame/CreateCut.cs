@@ -11,6 +11,8 @@ public class CreateCut : MonoBehaviour
 
 	private bool dragging = false;
 	private Vector2 swipeStart;
+	public AudioSource audio;
+	public AudioClip swordSwish;
 
 	// Update is called once per frame
 	void Update () {
@@ -23,6 +25,10 @@ public class CreateCut : MonoBehaviour
 	}
 
 	private void createCut() {
+		audio = GetComponent<AudioSource>();
+		audio.volume = Random.Range(0.6f, .8f);
+		audio.pitch = Random.Range(0.9f, 1.05f);
+		audio.PlayOneShot(swordSwish);
 		this.dragging = false;
 		Vector2 swipeEnd = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		GameObject cut = Instantiate (this.cut, this.swipeStart, Quaternion.identity) as GameObject;
