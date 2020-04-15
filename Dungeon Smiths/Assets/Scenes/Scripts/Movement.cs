@@ -12,7 +12,9 @@ public class Movement : MonoBehaviour
     private Rigidbody rigid;
 	public GameObject keyDoors;
 	private bool[] isFirstTime;
-	
+	public AudioSource audio;
+	public AudioClip footSteps;
+	public AudioClip keySound;
 
     public bool isCollapsingLevel = false;
 
@@ -25,6 +27,7 @@ public class Movement : MonoBehaviour
 		for (int i = 0; i < isFirstTime.Length; i++) { isFirstTime[i] = true; }
 
 		rigid = GetComponent<Rigidbody>();
+		audio = GetComponent<AudioSource>();
 
         if(isCollapsingLevel)
         {
@@ -61,11 +64,11 @@ public class Movement : MonoBehaviour
             transform.Translate(-moveStick.Horizontal * 0.2f, 0, -moveStick.Vertical * 0.2f);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
-            if (GetComponent<AudioSource>().isPlaying == false)
+            if (audio.isPlaying == false)
             {
-                GetComponent<AudioSource>().volume = Random.Range(0.6f, .8f);
-                GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.05f);
-                GetComponent<AudioSource>().Play();
+                audio.volume = Random.Range(0.6f, .8f);
+                audio.pitch = Random.Range(0.9f, 1.05f);
+                audio.PlayOneShot(footSteps);
             }
         }
         if (camStick.Horizontal != 0 || camStick.Vertical != 0)
@@ -138,6 +141,8 @@ public class Movement : MonoBehaviour
 
 		if (other.gameObject.CompareTag("KeyPart"))
         {
+
+			audio.PlayOneShot(keySound);
             int count = int.Parse(keyText.text.Substring(6, 1));
             ++count;
             keyText.text = "Keys: " + count + "/5";
