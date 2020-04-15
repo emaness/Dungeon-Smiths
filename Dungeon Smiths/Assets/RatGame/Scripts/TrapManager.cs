@@ -13,6 +13,13 @@ public class TrapManager : MonoBehaviour
     public int numOfTraps = 5;
     public Vector2[] coordinates = new Vector2[15];
 
+    public AudioSource audio;
+    public AudioClip fireStartSound;
+    public AudioClip sparksSound;
+	public AudioClip bombSound;
+	public AudioClip gasSound;
+	public AudioClip windSound;
+
     public GameObject trap1obj; //fire
     public GameObject trap2obj; //rock
     public GameObject trap3obj; //pit
@@ -73,6 +80,8 @@ public class TrapManager : MonoBehaviour
 
         int countLoaded = SceneManager.sceneCount;
         Scene[] loadedScenes = new Scene[countLoaded];
+
+        audio = GetComponent<AudioSource>();
 
         for (int i = 0; i < countLoaded; i++)
         {
@@ -182,6 +191,8 @@ public class TrapManager : MonoBehaviour
         {
             if (board[i, y] != "Done")
             {
+                audio.PlayOneShot(fireStartSound);
+            
                 GameObject newTrap = Instantiate(trap1obj, coordinatesList[i, y], Quaternion.identity);
                 newTrap.transform.localScale += new Vector3(25.0f, 25.0f, 25.0f);
             }
@@ -213,6 +224,7 @@ public class TrapManager : MonoBehaviour
                 {
                     if (board[i, j] != "Done")
                     {
+                        audio.PlayOneShot(sparksSound);
                         GameObject newTrap = Instantiate(trap2obj, coordinatesList[i, j], Quaternion.identity);
                         newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
                     }
@@ -246,6 +258,7 @@ public class TrapManager : MonoBehaviour
     {
         if (board[x, y] != "Done")
         {
+            audio.PlayOneShot(windSound);
             GameObject newTrap = Instantiate(trap3obj, coordinatesList[x, y], Quaternion.identity);
             newTrap.transform.localScale += new Vector3(10.0f, 10.0f, 10.0f);
         }
@@ -254,6 +267,7 @@ public class TrapManager : MonoBehaviour
 
         numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+        audio.Stop();
 
         if (board[x, y] != "Done")
         {
@@ -269,6 +283,7 @@ public class TrapManager : MonoBehaviour
         {
             if (board[x, i] != "Done")
             {
+                audio.PlayOneShot(gasSound);
                 GameObject newTrap = Instantiate(trap4obj, coordinatesList[x, i], Quaternion.identity);
                 newTrap.transform.localScale += new Vector3(25.0f, 25.0f, 25.0f);
             }
@@ -278,6 +293,7 @@ public class TrapManager : MonoBehaviour
 
         numOfTraps -= 1;
         trapText.text = "Traps Remaining: " + numOfTraps;
+        audio.Stop();
 
         for (int i = 0; i < 5; i++)
         {
@@ -292,6 +308,7 @@ public class TrapManager : MonoBehaviour
 
     private IEnumerator trap5(int x, int y)
     {
+        audio.PlayOneShot(bombSound);
         GameObject newTrap = Instantiate(trap5obj, coordinatesList[1, 2], Quaternion.identity);
         newTrap.transform.localScale += new Vector3(20.0f, 20.0f, 20.0f);
 
