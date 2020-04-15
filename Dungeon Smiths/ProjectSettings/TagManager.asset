@@ -32,6 +32,9 @@ TagManager:
   - blood
   - KeyPart
   - FxTemporaire
+  - Cut
+  - RockTroll
+  - ScorpionInsect
   layers:
   - Default
   - TransparentFX

@@ -41,6 +41,7 @@ public class Movement : MonoBehaviour
 
     IEnumerator CollapsingRoutine()
     {
+        /*
 		yield return new WaitForSeconds(5.0f);
 
         var origPos = cam.transform.position;
@@ -60,7 +61,7 @@ public class Movement : MonoBehaviour
 		audio.Stop();
         cam.transform.position = origPos;
 
-        enterMinigame("CaveIn");
+        enterMinigame("CaveIn");*/
 		yield return null;
     }
 
@@ -112,40 +113,57 @@ public class Movement : MonoBehaviour
     {
         string scene = null;
 
-        if(other.gameObject.CompareTag("FireObstacle"))
-        {
-            scene = "FireGame";
-        } else if(other.gameObject.CompareTag("TileMatchingCube"))
-        {
-            scene = "TileMatchingGame";
-        } else if(other.gameObject.CompareTag("Minecart"))
-        {
-            scene = "Minecart Game";  
-        } else if(other.gameObject.CompareTag("Skeleton"))
-        {
-            scene = "RockThrowing";
-        } else if(other.gameObject.CompareTag("Spider"))
-        {
-            scene = "spiderScene";
-        } else if(other.gameObject.CompareTag("EndLevel1Rock"))
-        {
-            scene = "CaveIn";
-        } else if(other.gameObject.CompareTag("Gorilla"))
-        {
-            scene = "FireDragon";
-        }else if (other.gameObject.CompareTag("KnightScene"))
-        {
-            scene = "KnightScene";
-        } else if(other.gameObject.CompareTag("Snake"))
-        {
-            scene = "Snake";
-        }else if (other.gameObject.CompareTag("Chest"))
+		if (other.gameObject.CompareTag("FireObstacle"))
+		{
+			scene = "FireGame";
+		}
+		else if (other.gameObject.CompareTag("TileMatchingCube"))
+		{
+			scene = "TileMatchingGame";
+		}
+		else if (other.gameObject.CompareTag("Minecart"))
+		{
+			scene = "Minecart Game";
+		}
+		else if (other.gameObject.CompareTag("Skeleton"))
+		{
+			scene = "RockThrowing";
+		}
+		else if (other.gameObject.CompareTag("Spider"))
+		{
+			scene = "spiderScene";
+		}
+		else if (other.gameObject.CompareTag("EndLevel1Rock"))
+		{
+			scene = "CaveIn";
+		}
+		else if (other.gameObject.CompareTag("Gorilla"))
+		{
+			scene = "FireDragon";
+		}
+		else if (other.gameObject.CompareTag("KnightScene"))
+		{
+			scene = "KnightScene";
+		}
+		else if (other.gameObject.CompareTag("Snake"))
+		{
+			scene = "Snake";
+		}
+		else if (other.gameObject.CompareTag("Chest"))
 		{
 			scene = "final2Scene";
-		}
+		} 
 		else if (other.gameObject.CompareTag("Rat"))
 		{
 			scene = "RatGame";
+		}
+		else if (other.gameObject.CompareTag("RockTroll"))
+		{
+			scene = "RockTroll";
+		}
+		else if (other.gameObject.CompareTag("ScorpionInsect"))
+		{
+			scene = "ScorpionInsect";
 		}
 
 		if (other.gameObject.CompareTag("KeyPart"))
