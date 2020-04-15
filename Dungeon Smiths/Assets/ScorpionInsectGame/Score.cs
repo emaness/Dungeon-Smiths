@@ -17,10 +17,11 @@ public class Score : MonoBehaviour {
 
     public IEnumerator DoWin()
     {
-		GameObject.Find("WinText").SetActive(true);
-		GameObject.Find("BombSpawner").SetActive(false);
-		GameObject.Find("ScorpionSpawner").SetActive(false);
-		GameObject.Find("Sword").SetActive(false);
+		var canvas = GameObject.Find("Canvas");
+		canvas.transform.Find("WinText").gameObject.SetActive(true);
+        GameObject.Find("BombSpawner").gameObject.SetActive(false);
+		GameObject.Find("ScorpionSpawner").gameObject.SetActive(false);
+		GameObject.Find("Sword").gameObject.SetActive(false);
 
 		yield return new WaitForSeconds(2.0f);
 

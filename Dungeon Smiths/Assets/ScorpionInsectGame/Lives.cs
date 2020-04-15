@@ -15,10 +15,11 @@ public class Lives : MonoBehaviour{
 
     public IEnumerator DoLose()
     {
-        GameObject.Find("WinText").SetActive(true);
+        var canvas = GameObject.Find("Canvas");
+        canvas.transform.Find("LoseText").gameObject.SetActive(true);
         GameObject.Find("BombSpawner").SetActive(false);
-        GameObject.Find("ScorpionSpawner").SetActive(false);
-        GameObject.Find("Sword").SetActive(false);
+        GameObject.Find("ScorpionSpawner").gameObject.SetActive(false);
+        GameObject.Find("Sword").gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2.0f);
 
