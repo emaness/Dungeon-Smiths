@@ -5,6 +5,7 @@ using UnityEngine;
 public class JumpKingCamera : MonoBehaviour
 {
     public GameObject player;
+    public GameObject textCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -22,30 +23,21 @@ public class JumpKingCamera : MonoBehaviour
             Vector3 camMove = transform.position;
             camMove.y = 0.1f;
             transform.position = camMove;
+            textCanvas.SetActive(true);
         }
         else if ((player.transform.position.y >= 11) && (player.transform.position.y < 32.5))
         {
             Vector3 camMove = transform.position;
             camMove.y = 21.6f;
             transform.position = camMove;
+            textCanvas.SetActive(false);
         }
-        else if ((player.transform.position.y >= 32.5) && (player.transform.position.y < 53.5))
+        else if (player.transform.position.y >= 32.5)
         {
             Vector3 camMove = transform.position;
             camMove.y = 43.1f;
             transform.position = camMove;
-        }
-        else if ((player.transform.position.y >= 53.5) && (player.transform.position.y < 75.5))
-        {
-            Vector3 camMove = transform.position;
-            camMove.y = 64.6f;
-            transform.position = camMove;
-        }
-        else if (player.transform.position.y >= 75.5)
-        {
-            Vector3 camMove = transform.position;
-            camMove.y = 86.1f;
-            transform.position = camMove;
+            textCanvas.SetActive(false);
         }
     }
 }
