@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
 	public AudioSource audio;
 	public AudioClip footSteps;
 	public AudioClip keySound;
+	public AudioClip shakingSound;
 
     public bool isCollapsingLevel = false;
 
@@ -37,11 +38,13 @@ public class Movement : MonoBehaviour
 
     IEnumerator CollapsingRoutine()
     {
-        yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(5.0f);
 
         var origPos = cam.transform.position;
 
-        for(var i = 0; i != 75; ++i)
+		audio.PlayOneShot(shakingSound);
+
+		for (var i = 0; i != 75; ++i)
         {
             cam.transform.position = new Vector3(
                 origPos.x + Random.Range(-0.4f, 0.4f),
@@ -50,6 +53,8 @@ public class Movement : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
         }
+
+		audio.Stop();
         cam.transform.position = origPos;
 
         enterMinigame("CaveIn");

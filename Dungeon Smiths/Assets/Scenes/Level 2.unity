@@ -30583,6 +30583,11 @@ PrefabInstance:
       propertyPath: keySound
       value: 
       objectReference: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+    - target: {fileID: 2927441682888171269, guid: 502ee6ae5d4cd401c96b82cc3ed6112e,
+        type: 3}
+      propertyPath: shakingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ae4d298ed547ba4c88587effb75d7e1, type: 3}
     - target: {fileID: 2927441682888171291, guid: 502ee6ae5d4cd401c96b82cc3ed6112e,
         type: 3}
       propertyPath: m_LocalPosition.x
