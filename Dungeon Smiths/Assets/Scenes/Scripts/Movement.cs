@@ -233,7 +233,7 @@ public class Movement : MonoBehaviour
 		{
 			return isFirstTime[2];
 		}
-		else if (scene.Equals("Skeleton"))num
+		else if (scene.Equals("Skeleton"))
 		{
 			return isFirstTime[3];
 		}
