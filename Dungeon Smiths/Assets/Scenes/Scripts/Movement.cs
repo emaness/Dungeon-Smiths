@@ -32,17 +32,11 @@ public class Movement : MonoBehaviour
 
 		rigid = GetComponent<Rigidbody>();
 		audio = GetComponent<AudioSource>();
-
-        if(isCollapsingLevel)
-        {
-            StartCoroutine("CollapsingRoutine");
-        }
     }
 
     IEnumerator CollapsingRoutine()
     {
-        /*
-		yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(1.0f);
 
         var origPos = cam.transform.position;
 
@@ -61,7 +55,7 @@ public class Movement : MonoBehaviour
 		audio.Stop();
         cam.transform.position = origPos;
 
-        enterMinigame("CaveIn");*/
+        enterMinigame("CaveIn");
 		yield return null;
     }
 
@@ -112,6 +106,8 @@ public class Movement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string scene = null;
+
+		Debug.Log("trigger enter?");
 
 		if (other.gameObject.CompareTag("FireObstacle"))
 		{
@@ -165,6 +161,10 @@ public class Movement : MonoBehaviour
 		{
 			scene = "ScorpionInsect";
 		}
+        else if(other.gameObject.CompareTag("Level2Exit"))
+        {
+			scene = "JumpKing";
+        }
 
 		if (other.gameObject.CompareTag("KeyPart"))
         {
@@ -173,7 +173,13 @@ public class Movement : MonoBehaviour
             int count = int.Parse(keyText.text.Substring(6, 1));
             ++count;
             keyText.text = "Keys: " + count + "/" + numKeys;
-            Destroy(other.gameObject);
+
+			if (isCollapsingLevel && count == numKeys/2)
+			{
+				StartCoroutine("CollapsingRoutine");
+			}
+
+			Destroy(other.gameObject);
 			if(count == numKeys)
 			{
 				Destroy(keyDoors.gameObject);
