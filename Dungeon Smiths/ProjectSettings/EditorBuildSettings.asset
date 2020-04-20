@@ -19,7 +19,7 @@ EditorBuildSettings:
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: 
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Tile Matching/Scenes/TileMatchingGame.unity
     guid: 6617b440655ee714e818e6b8c70d975f
@@ -71,4 +71,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Intro/Scenes/Intro.unity
     guid: 09f650c03900d01459e8b3e1eab5b936
+  - enabled: 1
+    path: Assets/Scenes/GameOver2.unity
+    guid: 52b6e870323be2946a1f6f1add9e4426
+  - enabled: 1
+    path: Assets/Scenes/YouWin.unity
+    guid: f1cf3bef78630b945ab93554b967fb81
+  - enabled: 1
+    path: Assets/Ending/Scenes/Ending.unity
+    guid: 4915e8498e5ef804f995e2f6270693b1
   m_configObjects: {}

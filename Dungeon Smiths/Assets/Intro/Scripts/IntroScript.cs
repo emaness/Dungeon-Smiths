@@ -242,6 +242,9 @@ public class IntroScript : MonoBehaviour
             else if (scriptNum == 19)
             {
                 Destroy(teleport);
+                bubble1.SetActive(false);
+                text1.SetActive(false);
+                enemy.SetActive(false);
                 Vector3 camMove = transform.position;
                 camMove.x = 60.0f;
                 transform.position = camMove;
