@@ -89,6 +89,7 @@ public class Movement : MonoBehaviour
         camStick.Reset();
 
 		bool needInstruction = getFirstTime(sceneName);
+
 		int numberOfNeed = 0;
 		if (needInstruction) numberOfNeed = 1;
 		PlayerPrefs.SetInt("isFirstTime", numberOfNeed);
@@ -106,8 +107,6 @@ public class Movement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string scene = null;
-
-		Debug.Log("trigger enter?");
 
 		if (other.gameObject.CompareTag("FireObstacle"))
 		{
@@ -196,7 +195,7 @@ public class Movement : MonoBehaviour
 
 	void setFirstTime(string scene)
 	{
-		if (scene.Equals("FireObstacle"))
+		if (scene.Equals("FireGame"))
 		{
 			isFirstTime[0] = false;
 		}
@@ -249,7 +248,7 @@ public class Movement : MonoBehaviour
 
 	public bool getFirstTime(string scene)
 	{
-		if (scene.Equals("FireObstacle"))
+		if (scene.Equals("FireGame"))
 		{
 			return isFirstTime[0];
 		}
