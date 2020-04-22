@@ -14,9 +14,14 @@ public class EndingScript : MonoBehaviour
     public GameObject bubble1;
     public GameObject bubble2;
     public GameObject teleporter;
+    public GameObject border1;
+    public GameObject border2;
+    public GameObject border3;
     private int scriptNum = 0;
     private Animator anim;
     private PlatformerMovement2 moveScript;
+    private EnemyPhase1 enemyScript1;
+    private EnemyPhase2 enemyScript2;
     private GameObject text1;
     private GameObject text2;
     private GameObject teleport;
@@ -29,6 +34,8 @@ public class EndingScript : MonoBehaviour
         Camera.main.aspect = width / height;
         anim = player.GetComponent<Animator>();
         moveScript = player.GetComponent<PlatformerMovement2>();
+        enemyScript1 = enemy.GetComponent<EnemyPhase1>();
+        enemyScript2 = enemy2.GetComponent<EnemyPhase2>();
         text1 = textCanvas.transform.GetChild(1).gameObject;
         text2 = textCanvas.transform.GetChild(2).gameObject;
     }
@@ -40,9 +47,11 @@ public class EndingScript : MonoBehaviour
         {
             canvas.SetActive(false);
             moveScript.enabled = false;
+            enemyScript1.enabled = false;
+            enemyScript2.enabled = false;
             anim.SetTrigger("Walk");
         }
-        if (scriptNum == 1 || (scriptNum == 5 && winCheck1()) || (scriptNum == 15 && winCheck1()))
+        if (scriptNum == 1 || (scriptNum == 6 && winCheck1()) || (scriptNum == 16 && winCheck2()))
         {
             Vector3 temp = player.transform.eulerAngles;
             temp.y = 0.0f;
@@ -53,20 +62,34 @@ public class EndingScript : MonoBehaviour
             {
                 anim.SetTrigger("Idle");
             }
+            else
+            {
+                anim.SetTrigger("Walk");
+            }
         }
         if (scriptNum == 5 && !winCheck1())
         {
+            if (loseCheck())
+            {
+                SceneManager.LoadScene("GameOver2");
+            }
             bubble1.SetActive(false);
             text1.SetActive(false);
             bubble2.SetActive(false);
             text2.SetActive(false);
             textCanvas.transform.GetChild(0).gameObject.SetActive(false);
             moveScript.enabled = true;
+            enemyScript1.enabled = true;
             canvas.SetActive(true);
+            border1.SetActive(true);
+            border2.SetActive(true);
+            border3.SetActive(true);
         }
         if (scriptNum == 5 && winCheck1())
         {
+            moveScript.health = 100;
             moveScript.enabled = false;
+            enemyScript1.enabled = false;
             canvas.SetActive(false);
             anim.SetTrigger("Walk");
             Vector3 target2 = new Vector3(enemy.transform.position.x, enemy.transform.position.y, enemy.transform.position.z);
@@ -99,18 +122,24 @@ public class EndingScript : MonoBehaviour
                 enemy2.transform.localScale += target;
             }
         }
-        if (scriptNum == 15 && !winCheck1())
+        if (scriptNum == 15 && !winCheck2())
         {
+            if (loseCheck())
+            {
+                SceneManager.LoadScene("GameOver2");
+            }
             bubble1.SetActive(false);
             text1.SetActive(false);
             bubble2.SetActive(false);
             text2.SetActive(false);
             moveScript.enabled = true;
+            enemyScript2.enabled = true;
             canvas.SetActive(true);
         }
-        if (scriptNum == 15 && winCheck1())
+        if (scriptNum == 15 && winCheck2())
         {
             moveScript.enabled = false;
+            enemyScript2.enabled = false;
             canvas.SetActive(false);
             anim.SetTrigger("Walk");
             scriptNum++;
@@ -172,6 +201,7 @@ public class EndingScript : MonoBehaviour
                 text2.SetActive(false);
                 textCanvas.transform.GetChild(0).gameObject.SetActive(false);
                 moveScript.enabled = true;
+                enemyScript1.enabled = true;
                 canvas.SetActive(true);
                 scriptNum++;
             }
@@ -196,6 +226,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 7)
             {
+                anim.SetTrigger("Idle");
                 bubble2.SetActive(false);
                 text2.SetActive(false);
                 enemy.transform.GetChild(2).gameObject.SetActive(false);
@@ -205,6 +236,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 8)
             {
+                anim.SetTrigger("Idle");
                 bubble1.SetActive(false);
                 text1.SetActive(false);
                 bubble2.SetActive(false);
@@ -214,6 +246,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 9)
             {
+                anim.SetTrigger("Idle");
                 bubble1.SetActive(false);
                 text1.SetActive(false);
                 bubble2.SetActive(false);
@@ -223,6 +256,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 10)
             {
+                anim.SetTrigger("Idle");
                 Vector3 target = new Vector3(12.6f, -5f, 0);
                 enemy2.transform.position = target;
                 bubble1.SetActive(true);
@@ -235,12 +269,14 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 11)
             {
+                anim.SetTrigger("Idle");
                 text1.GetComponent<Text>().text = "Just give me the artifact man.";
                 text2.GetComponent<Text>().text = "You're too naive little dungeon smith. Embrace my power!";
                 scriptNum++;
             }
             else if (scriptNum == 12)
             {
+                anim.SetTrigger("Idle");
                 bubble2.SetActive(false);
                 text2.SetActive(false);
                 text1.GetComponent<Text>().text = "What the...";
@@ -248,6 +284,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 13)
             {
+                anim.SetTrigger("Idle");
                 Vector3 target = new Vector3(12.6f, 7f, 0);
                 enemy2.transform.position = target;
                 bubble2.SetActive(false);
@@ -264,6 +301,7 @@ public class EndingScript : MonoBehaviour
                 Vector3 target = new Vector3(10.0f, 14.0f, 0.0f);
                 enemy2.transform.localScale = target;
                 moveScript.enabled = true;
+                enemyScript2.enabled = false;
                 canvas.SetActive(true);
                 scriptNum++;
             }
@@ -277,6 +315,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 17)
             {
+                anim.SetTrigger("Idle");
                 Vector3 target = new Vector3(12.6f, -5f, 0);
                 enemy2.transform.position = target;
                 bubble1.SetActive(true);
@@ -286,6 +325,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 18)
             {
+                anim.SetTrigger("Idle");
                 bubble2.SetActive(true);
                 text2.SetActive(true);
                 text1.GetComponent<Text>().text = "Poor choice for last words.";
@@ -294,6 +334,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 19)
             {
+                anim.SetTrigger("Idle");
                 bubble2.SetActive(false);
                 text2.SetActive(false);
                 enemy2.transform.GetChild(2).gameObject.SetActive(false);
@@ -303,6 +344,7 @@ public class EndingScript : MonoBehaviour
             }
             else if (scriptNum == 20)
             {
+                anim.SetTrigger("Idle");
                 bubble1.SetActive(false);
                 text1.SetActive(false);
                 bubble2.SetActive(false);
@@ -313,14 +355,14 @@ public class EndingScript : MonoBehaviour
                 camMove.x = 100.0f;
                 transform.position = camMove;
                 textCanvas.transform.GetChild(0).gameObject.SetActive(true);
-                textCanvas.transform.GetChild(0).GetComponent<Text>().color = Color.red;
+                textCanvas.transform.GetChild(0).GetComponent<Text>().color = Color.black;
                 textCanvas.transform.GetChild(0).GetComponent<Text>().text = "But little did the humans know...";
                 scriptNum++;
             }
             else if (scriptNum == 21)
             {
                 textCanvas.transform.GetChild(0).gameObject.SetActive(true);
-                textCanvas.transform.GetChild(0).GetComponent<Text>().text = "...that the aliens are prepared for their artifact.";
+                textCanvas.transform.GetChild(0).GetComponent<Text>().text = "...that this is just the beginning.";
                 scriptNum++;
             }
             else if (scriptNum == 22)
@@ -374,11 +416,28 @@ public class EndingScript : MonoBehaviour
 
     private bool winCheck1()
     {
-        return true;
+        if (enemyScript1.health <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     private bool winCheck2()
     {
-        return true;
+        if (enemyScript2.health <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool loseCheck()
+    {
+        if (moveScript.health <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 }

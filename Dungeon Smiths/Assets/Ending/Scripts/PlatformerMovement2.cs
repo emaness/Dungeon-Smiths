@@ -8,6 +8,7 @@ public class PlatformerMovement2 : MonoBehaviour
 {
     public Joystick moveStick;
     public Button jumpButton;
+    public Button fireButton;
     private Rigidbody2D rigid;
     private Animator anim;
 
@@ -15,6 +16,7 @@ public class PlatformerMovement2 : MonoBehaviour
     public AudioClip winAudio;
     public AudioClip bounceAudio;
 
+    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class PlatformerMovement2 : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
+        fireButton.onClick.AddListener(() => checkFire2());
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class PlatformerMovement2 : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, 1 << 9);
         checkWalk(hit);
         checkWalk2(hit);
+        checkFire();
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.right, 1.0f, 1 << 8);
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.left, 1.0f, 1 << 8);
         jumpButton.onClick.RemoveAllListeners();
@@ -136,5 +140,18 @@ public class PlatformerMovement2 : MonoBehaviour
     {
         Vector2 jump_force = new Vector2(0, 750.0f);
         rigid.AddForce(jump_force);
+    }
+
+    private void checkFire()
+    {
+        if (Input.GetKeyDown("z"))
+        {
+            print("AHADH");
+        }
+    }
+
+    private void checkFire2()
+    {
+        print("AHADH");
     }
 }
