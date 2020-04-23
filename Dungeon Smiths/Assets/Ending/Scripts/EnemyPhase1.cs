@@ -17,4 +17,13 @@ public class EnemyPhase1 : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Rogue_weapon_001(Clone)")
+        {
+            health -= 10;
+            Destroy(collision.gameObject);
+        }
+    }
 }

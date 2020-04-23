@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyPhase2 : MonoBehaviour
 {
-    public int health = 100;
+    public int health = 200;
 
     // Start is called before the first frame update
     void Start()
@@ -16,5 +16,14 @@ public class EnemyPhase2 : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Rogue_weapon_001(Clone)")
+        {
+            health -= 10;
+            Destroy(collision.gameObject);
+        }
     }
 }

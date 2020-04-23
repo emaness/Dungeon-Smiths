@@ -17,6 +17,9 @@ public class PlatformerMovement2 : MonoBehaviour
     public AudioClip bounceAudio;
 
     public int health = 100;
+    public GameObject knife;
+    public bool fireable = true;
+    private float countdown = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +38,19 @@ public class PlatformerMovement2 : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, 1 << 9);
         checkWalk(hit);
         checkWalk2(hit);
-        checkFire();
+        if (fireable)
+        {
+            checkFire();
+        }
+        else if (!(fireable) && (countdown > 0.0f))
+        {
+            countdown -= Time.deltaTime;
+        }
+        else if (countdown <= 0.0f)
+        {
+            countdown = 1.0f;
+            fireable = true;
+        }
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position, Vector2.right, 1.0f, 1 << 8);
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.left, 1.0f, 1 << 8);
         jumpButton.onClick.RemoveAllListeners();
@@ -146,12 +161,38 @@ public class PlatformerMovement2 : MonoBehaviour
     {
         if (Input.GetKeyDown("z"))
         {
-            print("AHADH");
+            anim.SetTrigger("Attack3");
+            fireable = false;
+            StartCoroutine("waitAnimation", 0.3f);
         }
     }
 
     private void checkFire2()
     {
-        print("AHADH");
+        if (fireable)
+        {
+            anim.SetTrigger("Attack3");
+            fireable = false;
+            StartCoroutine("waitAnimation", 0.3f);
+        }
+    }
+
+    private IEnumerator waitAnimation(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Vector3 target = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
+        GameObject shot = Instantiate(knife, target, transform.rotation);
+        Vector3 rotate = shot.transform.eulerAngles;
+        rotate.z = -90.0f;
+        shot.transform.eulerAngles = rotate;
+        Rigidbody2D proc = shot.GetComponent<Rigidbody2D>();
+        if (transform.eulerAngles.y == 180.0f)
+        {
+            proc.velocity = new Vector2(-50.0f, 0.0f);
+        }
+        else
+        {
+            proc.velocity = new Vector2(50.0f, 0.0f);
+        }
     }
 }

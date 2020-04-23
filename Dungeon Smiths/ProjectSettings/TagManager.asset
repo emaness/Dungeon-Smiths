@@ -39,6 +39,9 @@ TagManager:
   - Chest
   - jump
   - Level2Exit
+  - Border
+  - Enemy1
+  - Enemy2
   layers:
   - Default
   - TransparentFX
