@@ -10,9 +10,9 @@ public class gameController : MonoBehaviour
 	[SerializeField] public Text YouWin;
 	[SerializeField] public Text TryAgain;
 	public Text instructions;
-	private int[] numbersOne = { 0, 1, 2, 3, 4, };
-	private int[] numbersTwo = { 0, 1, 4, 3, 2, 0, 4 };
-	private int[] numbersThree = { 2, 4, 3, 1, 0, 3, 0, 1, 4};
+	private int[] numbersOne = { 0, 1, 2, 3, };
+	private int[] numbersTwo = { 0, 1, 3, 2, 0 };
+	private int[] numbersThree = { 2, 4, 3, 1, 0, 3, 0};
 	private int counter;
 	private bool isOne;
 	private bool isTwo;
@@ -129,7 +129,7 @@ public class gameController : MonoBehaviour
 
 
 		}
-		yield return new WaitForSeconds(7.0f);
+		yield return new WaitForSeconds(5.0f);
 		//delete the sequence
 		for (int i = 0; i < numbersTwo.Length; i++)
 		{
@@ -160,7 +160,7 @@ public class gameController : MonoBehaviour
 
 
 		}
-		yield return new WaitForSeconds(10.0f);
+		yield return new WaitForSeconds(7.0f);
 		//delete the sequence
 		for (int i = 0; i < numbersThree.Length; i++)
 		{

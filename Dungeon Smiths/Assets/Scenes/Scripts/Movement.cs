@@ -27,21 +27,16 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		isFirstTime = new bool[11];
+		isFirstTime = new bool[12];
 		for (int i = 0; i < isFirstTime.Length; i++) { isFirstTime[i] = true; }
 
 		rigid = GetComponent<Rigidbody>();
 		audio = GetComponent<AudioSource>();
-
-        if(isCollapsingLevel)
-        {
-            StartCoroutine("CollapsingRoutine");
-        }
     }
 
     IEnumerator CollapsingRoutine()
     {
-		yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(1.0f);
 
         var origPos = cam.transform.position;
 
@@ -94,6 +89,7 @@ public class Movement : MonoBehaviour
         camStick.Reset();
 
 		bool needInstruction = getFirstTime(sceneName);
+
 		int numberOfNeed = 0;
 		if (needInstruction) numberOfNeed = 1;
 		PlayerPrefs.SetInt("isFirstTime", numberOfNeed);
@@ -112,41 +108,62 @@ public class Movement : MonoBehaviour
     {
         string scene = null;
 
-        if(other.gameObject.CompareTag("FireObstacle"))
-        {
-            scene = "FireGame";
-        } else if(other.gameObject.CompareTag("TileMatchingCube"))
-        {
-            scene = "TileMatchingGame";
-        } else if(other.gameObject.CompareTag("Minecart"))
-        {
-            scene = "Minecart Game";  
-        } else if(other.gameObject.CompareTag("Skeleton"))
-        {
-            scene = "RockThrowing";
-        } else if(other.gameObject.CompareTag("Spider"))
-        {
-            scene = "spiderScene";
-        } else if(other.gameObject.CompareTag("EndLevel1Rock"))
-        {
-            scene = "CaveIn";
-        } else if(other.gameObject.CompareTag("Gorilla"))
-        {
-            scene = "FireDragon";
-        }else if (other.gameObject.CompareTag("KnightScene"))
-        {
-            scene = "KnightScene";
-        } else if(other.gameObject.CompareTag("Snake"))
-        {
-            scene = "Snake";
-        }else if (other.gameObject.CompareTag("Chest"))
+		if (other.gameObject.CompareTag("FireObstacle"))
+		{
+			scene = "FireGame";
+		}
+		else if (other.gameObject.CompareTag("TileMatchingCube"))
+		{
+			scene = "TileMatchingGame";
+		}
+		else if (other.gameObject.CompareTag("Minecart"))
+		{
+			scene = "Minecart Game";
+		}
+		else if (other.gameObject.CompareTag("Skeleton"))
+		{
+			scene = "RockThrowing";
+		}
+		else if (other.gameObject.CompareTag("Spider"))
+		{
+			scene = "spiderScene";
+		}
+		else if (other.gameObject.CompareTag("EndLevel1Rock"))
+		{
+			scene = "CaveIn";
+		}
+		else if (other.gameObject.CompareTag("Gorilla"))
+		{
+			scene = "FireDragon";
+		}
+		else if (other.gameObject.CompareTag("KnightScene"))
+		{
+			scene = "KnightScene";
+		}
+		else if (other.gameObject.CompareTag("Snake"))
+		{
+			scene = "Snake";
+		}
+		else if (other.gameObject.CompareTag("Chest"))
 		{
 			scene = "final2Scene";
-		}
+		} 
 		else if (other.gameObject.CompareTag("Rat"))
 		{
 			scene = "RatGame";
 		}
+		else if (other.gameObject.CompareTag("RockTroll"))
+		{
+			scene = "RockTroll";
+		}
+		else if (other.gameObject.CompareTag("ScorpionInsect"))
+		{
+			scene = "ScorpionInsect";
+		}
+        else if(other.gameObject.CompareTag("Level2Exit"))
+        {
+			scene = "JumpKing";
+        }
 
 		if (other.gameObject.CompareTag("KeyPart"))
         {
@@ -155,7 +172,13 @@ public class Movement : MonoBehaviour
             int count = int.Parse(keyText.text.Substring(6, 1));
             ++count;
             keyText.text = "Keys: " + count + "/" + numKeys;
-            Destroy(other.gameObject);
+
+			if (isCollapsingLevel && count == numKeys/2)
+			{
+				StartCoroutine("CollapsingRoutine");
+			}
+
+			Destroy(other.gameObject);
 			if(count == numKeys)
 			{
 				Destroy(keyDoors.gameObject);
@@ -172,7 +195,7 @@ public class Movement : MonoBehaviour
 
 	void setFirstTime(string scene)
 	{
-		if (scene.Equals("FireObstacle"))
+		if (scene.Equals("FireGame"))
 		{
 			isFirstTime[0] = false;
 		}
@@ -180,7 +203,7 @@ public class Movement : MonoBehaviour
 		{
 			isFirstTime[1] = false;
 		}
-		else if (scene.Equals("Minecart"))
+		else if (scene.Equals("RockTroll"))
 		{
 			isFirstTime[2] = false;
 		}
@@ -217,11 +240,15 @@ public class Movement : MonoBehaviour
 		{
 			isFirstTime[10] = false;
 		}
+		else if (scene.Equals("ScorpionInsect"))
+		{
+			isFirstTime[11] = false;
+		}
 	}
 
 	public bool getFirstTime(string scene)
 	{
-		if (scene.Equals("FireObstacle"))
+		if (scene.Equals("FireGame"))
 		{
 			return isFirstTime[0];
 		}
@@ -229,7 +256,7 @@ public class Movement : MonoBehaviour
 		{
 			return isFirstTime[1];
 		}
-		else if (scene.Equals("Minecart"))
+		else if (scene.Equals("RockTroll"))
 		{
 			return isFirstTime[2];
 		}
@@ -266,6 +293,10 @@ public class Movement : MonoBehaviour
 		{
 			return isFirstTime[10];
 		}
-		else return true;
+		else if (scene.Equals("ScorpionInsect"))
+		{
+			return isFirstTime[11];
+		}
+		else return false;
 	}
 }

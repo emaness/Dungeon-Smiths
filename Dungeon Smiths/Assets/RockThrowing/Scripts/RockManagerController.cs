@@ -17,6 +17,20 @@ public class RockManagerController : MonoBehaviour
     private bool stopped;
     public int rocksRemaining = 10;
 
+    private string sceneName
+    {
+        get
+        {
+            if(GameObject.Find("RockTroll") != null)
+            {
+                return "RockTroll";
+            } else
+            {
+                return "RockThrowing";
+            }
+        }
+    }
+
     void Start()
     {
         var rock = gameObject.transform.GetChild(0).gameObject;
@@ -32,7 +46,8 @@ public class RockManagerController : MonoBehaviour
     {
         yield return new WaitForSeconds(4.0f);
 
-        SceneManager.UnloadSceneAsync("RockThrowing");
+        var sn = sceneName;
+        SceneManager.UnloadSceneAsync(sn);
         Scene mt = SceneManager.GetActiveScene();
         // Scene mt = SceneManager.GetSceneByName("Level1");
         foreach (GameObject obj in mt.GetRootGameObjects())
@@ -60,9 +75,11 @@ public class RockManagerController : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
 
-        SceneManager.UnloadSceneAsync("RockThrowing").completed += e =>
+        var sn = sceneName;
+
+        SceneManager.UnloadSceneAsync(sn).completed += e =>
         {
-            SceneManager.LoadScene("RockThrowing", LoadSceneMode.Additive);
+            SceneManager.LoadScene(sn, LoadSceneMode.Additive);
         };
     }
 
