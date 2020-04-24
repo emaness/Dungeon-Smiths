@@ -11,6 +11,7 @@ public class EndingScript : MonoBehaviour
     public GameObject enemy2;
     public GameObject textCanvas;
     public GameObject canvas;
+    public GameObject healthCanvas;
     public GameObject bubble1;
     public GameObject bubble2;
     public GameObject teleporter;
@@ -46,6 +47,7 @@ public class EndingScript : MonoBehaviour
         if (scriptNum == 0)
         {
             canvas.SetActive(false);
+            healthCanvas.SetActive(false);
             moveScript.enabled = false;
             enemyScript1.enabled = false;
             enemyScript2.enabled = false;
@@ -79,6 +81,7 @@ public class EndingScript : MonoBehaviour
             text2.SetActive(false);
             textCanvas.transform.GetChild(0).gameObject.SetActive(false);
             moveScript.enabled = true;
+            healthCanvas.SetActive(true);
             enemyScript1.enabled = true;
             canvas.SetActive(true);
             border1.SetActive(true);
@@ -91,6 +94,7 @@ public class EndingScript : MonoBehaviour
             moveScript.enabled = false;
             enemyScript1.enabled = false;
             canvas.SetActive(false);
+            healthCanvas.SetActive(false);
             anim.SetTrigger("Walk");
             Vector3 target2 = new Vector3(enemy.transform.position.x, enemy.transform.position.y, enemy.transform.position.z);
             teleport = Instantiate(teleporter, target2, Quaternion.identity);
@@ -134,12 +138,14 @@ public class EndingScript : MonoBehaviour
             text2.SetActive(false);
             moveScript.enabled = true;
             enemyScript2.enabled = true;
+            healthCanvas.SetActive(true);
             canvas.SetActive(true);
         }
         if (scriptNum == 15 && winCheck2())
         {
             moveScript.enabled = false;
             enemyScript2.enabled = false;
+            healthCanvas.SetActive(false);
             canvas.SetActive(false);
             anim.SetTrigger("Walk");
             scriptNum++;
@@ -202,6 +208,7 @@ public class EndingScript : MonoBehaviour
                 textCanvas.transform.GetChild(0).gameObject.SetActive(false);
                 moveScript.enabled = true;
                 enemyScript1.enabled = true;
+                healthCanvas.SetActive(true);
                 canvas.SetActive(true);
                 scriptNum++;
             }
@@ -301,7 +308,8 @@ public class EndingScript : MonoBehaviour
                 Vector3 target = new Vector3(10.0f, 14.0f, 0.0f);
                 enemy2.transform.localScale = target;
                 moveScript.enabled = true;
-                enemyScript2.enabled = false;
+                enemyScript2.enabled = true;
+                healthCanvas.SetActive(true);
                 canvas.SetActive(true);
                 scriptNum++;
             }
