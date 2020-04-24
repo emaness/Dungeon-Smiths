@@ -45,6 +45,7 @@ TagManager:
   - Electric
   - WaterAttack
   - ExplosionAttack
+  - laser
   layers:
   - Default
   - TransparentFX

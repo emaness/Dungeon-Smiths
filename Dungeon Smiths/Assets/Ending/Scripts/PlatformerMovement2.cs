@@ -206,5 +206,18 @@ public class PlatformerMovement2 : MonoBehaviour
         {
             health -= 10;
         }
+        else if (collision.gameObject.name == "shot-1(Clone)")
+        {
+            health -= 5;
+            Destroy(collision.gameObject);
+        }
+    }
+    
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "laser")
+        {
+            health -= 1;
+        }
     }
 }

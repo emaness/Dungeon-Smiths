@@ -60,6 +60,10 @@ public class EnemyPhase1 : MonoBehaviour
             countdown = 5.0f;
             fireable = true;
         }
+        if (health == 0)
+        {
+            Destroy(teleport);
+        }
     }
 
     private void Teleport()
