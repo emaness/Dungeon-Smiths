@@ -74,17 +74,14 @@ public class knightGameController : MonoBehaviour
 			StartCoroutine("DoWin");
 		}
 
-		if ((Input.GetMouseButtonDown(0)) && bloodCount > 0)
+		if ((Input.GetMouseButton(0) ) && bloodCount > 0)
 		{
-			Touch touch = Input.GetTouch(0);
-			touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+			//Touch touch = Input.GetTouch(0);
+			touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); //touch.position);
 			touchPosition.z = -2;
 			direction = (touchPosition - Sponge.transform.position);
 			rb.velocity = new Vector2(direction.x, direction.y)* moveSpeed;
-			if(touch.phase == TouchPhase.Ended )
-			{
-				rb.velocity = Vector2.zero;
-			}
+			
 			//now if colides with red stain and has done this 5 times - subtract one from stain and move stain randomly somewhere else
 			
 			if(hitsOnStain >= randomWashNumber)
