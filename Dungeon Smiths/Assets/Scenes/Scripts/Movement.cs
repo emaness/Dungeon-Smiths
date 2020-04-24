@@ -151,6 +151,7 @@ public class Movement : MonoBehaviour
 		else if (other.gameObject.CompareTag("Rat"))
 		{
 			scene = "RatGame";
+			setFirstTime(scene);
 		}
 		else if (other.gameObject.CompareTag("RockTroll"))
 		{
