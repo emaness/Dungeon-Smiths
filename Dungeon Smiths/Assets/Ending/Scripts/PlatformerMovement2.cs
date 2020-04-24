@@ -33,6 +33,7 @@ public class PlatformerMovement2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(health);
         //1.0f is the distance from ground, 1 << 9 is a bitmask to check colliders with only platforms (horizontal)
         //1 << 8 is a bitmask to check colliders with only walls (vertical)
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, 1 << 9);
@@ -194,5 +195,9 @@ public class PlatformerMovement2 : MonoBehaviour
         {
             proc.velocity = new Vector2(50.0f, 0.0f);
         }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
     }
 }

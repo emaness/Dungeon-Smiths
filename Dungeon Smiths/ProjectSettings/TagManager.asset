@@ -42,6 +42,7 @@ TagManager:
   - Border
   - Enemy1
   - Enemy2
+  - Electric
   layers:
   - Default
   - TransparentFX
