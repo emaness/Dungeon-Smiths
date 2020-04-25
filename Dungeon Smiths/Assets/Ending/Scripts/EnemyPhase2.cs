@@ -24,12 +24,19 @@ public class EnemyPhase2 : MonoBehaviour
     private float countdown3 = 5.0f;
     private GameObject shield;
 
+    public AudioSource audio;
+    public AudioClip laserSound;
+    public AudioClip damageSound;
+    public AudioClip winSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
         //Phase 2 shoots waves of bullets every 3 seconds on top, mid, or bot
         //Also laser every 10 seconds on top, mid, or bot
         //Also dropped to 100 hp the boss will absorb damage and gain life instead
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -136,6 +143,7 @@ public class EnemyPhase2 : MonoBehaviour
         arr[2] = 2;
         float random = Random.Range(0.0f, 3.0f);
         int pick = arr[(int)random];
+        audio.PlayOneShot(laserSound);
         if (pick == 0)
         {
             laserWarn.SetActive(true);
@@ -197,6 +205,12 @@ public class EnemyPhase2 : MonoBehaviour
     {
         if (collision.gameObject.name == "Rogue_weapon_001(Clone)" && !lifeShieldActive)
         {
+            audio.PlayOneShot(damageSound);
+
+            if(health <= 10){
+                audio.PlayOneShot(winSound);    
+			}
+
             health -= 10;
             Destroy(collision.gameObject);
         }

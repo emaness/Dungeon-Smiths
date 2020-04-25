@@ -14,12 +14,15 @@ public class PlatformerMovement2 : MonoBehaviour
 
     public AudioSource audio;
     public AudioClip winAudio;
-    public AudioClip bounceAudio;
+    //public AudioClip bounceAudio;
+    public AudioClip knifeThrow;
+    public AudioClip damageSound;
 
     public int health = 100;
     public GameObject knife;
     public bool fireable = true;
     private float countdown = 1.0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -161,6 +164,7 @@ public class PlatformerMovement2 : MonoBehaviour
     {
         if (Input.GetKeyDown("z"))
         {
+            audio.PlayOneShot(knifeThrow);
             anim.SetTrigger("Attack3");
             fireable = false;
             StartCoroutine("waitAnimation", 0.3f);
@@ -208,6 +212,7 @@ public class PlatformerMovement2 : MonoBehaviour
         }
         else if (collision.gameObject.name == "shot-1(Clone)")
         {
+            audio.PlayOneShot(damageSound);
             health -= 5;
             Destroy(collision.gameObject);
         }

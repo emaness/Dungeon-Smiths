@@ -20,12 +20,20 @@ public class EnemyPhase1 : MonoBehaviour
     private GameObject teleport;
     private GameObject electric;
 
+    public AudioSource audio;
+    public AudioClip electricSound;
+    public AudioClip teleportSound;
+    public AudioClip waterSound;
+    public AudioClip explosionSound;
+    public AudioClip damageSound;
+
     // Start is called before the first frame update
     void Start()
     {
         arr[0] = "Lightning";
         arr[1] = "Hydro";
         arr[2] = "Explosion";
+        audio = GetComponent<AudioSource>();
         //Teleport happens every single interval
         //Basically- teleport + 1 random move of those 3
     }
@@ -75,6 +83,7 @@ public class EnemyPhase1 : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
+        audio.PlayOneShot(teleportSound);
         StartCoroutine("teleportDelay", 1.0f);
     }
     
@@ -138,6 +147,7 @@ public class EnemyPhase1 : MonoBehaviour
         electric = Instantiate(lightning, player.transform.position, Quaternion.identity);
         electric.transform.localScale += new Vector3(1.0f, 1.0f, 1.0f);
         fireable = false;
+        audio.PlayOneShot(electricSound);
         StartCoroutine("electricDelay", 0.5f);
     }
 
@@ -149,6 +159,7 @@ public class EnemyPhase1 : MonoBehaviour
             player.GetComponent<PlatformerMovement2>().health -= 10;
         }
         yield return new WaitForSeconds(time);
+        audio.PlayOneShot(electricSound);
         electric = Instantiate(lightning, player.transform.position, Quaternion.identity);
         electric.transform.localScale += new Vector3(1.0f, 1.0f, 1.0f);
         StartCoroutine("electricDelay2", 0.5f);
@@ -162,6 +173,7 @@ public class EnemyPhase1 : MonoBehaviour
             player.GetComponent<PlatformerMovement2>().health -= 10;
         }
         yield return new WaitForSeconds(time);
+        audio.PlayOneShot(electricSound);
         electric = Instantiate(lightning, player.transform.position, Quaternion.identity);
         electric.transform.localScale += new Vector3(1.0f, 1.0f, 1.0f);
         StartCoroutine("electricDelay3", 0.5f);
@@ -244,8 +256,8 @@ public class EnemyPhase1 : MonoBehaviour
 
     private IEnumerator HydroDelay(float time)
     {
+        audio.PlayOneShot(waterSound);
         yield return new WaitForSeconds(time);
-
         //Mid
         Vector3 target2 = new Vector3(-3.5f, -2.0f, 0.0f);
         GameObject waterWarn2 = Instantiate(hydro, target2, Quaternion.identity);
@@ -302,6 +314,7 @@ public class EnemyPhase1 : MonoBehaviour
 
     private void Explosion()
     {
+        audio.PlayOneShot(explosionSound);
         Vector3 target = new Vector3(0.0f, -5.0f, 0.0f);
         GameObject explodeWarn = Instantiate(explosionWarn, target, Quaternion.identity);
         explodeWarn.transform.localScale += new Vector3(1.0f, 1.0f, 1.0f);
@@ -310,7 +323,7 @@ public class EnemyPhase1 : MonoBehaviour
     }
     
     private IEnumerator ExplosionDelay(float time)
-    {
+    { 
         yield return new WaitForSeconds(time);
         Vector3 target = new Vector3(-15.0f, -7.0f, 0.0f);
         GameObject explode = Instantiate(explosion, target, Quaternion.identity);
@@ -385,6 +398,7 @@ public class EnemyPhase1 : MonoBehaviour
         if (collision.gameObject.name == "Rogue_weapon_001(Clone)")
         {
             health -= 10;
+            audio.PlayOneShot(damageSound);
             Destroy(collision.gameObject);
         }
     }
