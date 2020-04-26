@@ -81,7 +81,7 @@ public class gameController : MonoBehaviour
 		for(int i = 0; i < numbersOne.Length; i++)
 		{
 			GameObject first = Instantiate(images[numbersOne[i]]);
-			float x = 2f *  i +  -10 ;
+			float x = 2f *  i +  -7.5f ;
 			first.transform.position = new Vector3(x, 3, 0);
 			if (numbersOne[i] == 3)
 			{
@@ -114,7 +114,7 @@ public class gameController : MonoBehaviour
 		for (int i = 0; i < numbersTwo.Length; i++)
 		{
 			GameObject first = Instantiate(images[numbersTwo[i]]);
-			float x = 2f * i + -10;
+			float x = 2f * i + -7.5f;
 			first.transform.position = new Vector3(x, 3, 0);
 			if (numbersTwo[i] == 3)
 			{
@@ -145,7 +145,7 @@ public class gameController : MonoBehaviour
 		for (int i = 0; i < numbersThree.Length; i++)
 		{
 			GameObject first = Instantiate(images[numbersThree[i]]);
-			float x = 2.0f * i + -10;
+			float x = 2.0f * i + -7.5f;
 			first.transform.position = new Vector3(x, 3, 0);
 			if (numbersThree[i] == 3)
 			{
