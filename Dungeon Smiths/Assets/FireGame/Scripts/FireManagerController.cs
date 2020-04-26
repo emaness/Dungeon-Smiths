@@ -15,7 +15,7 @@ public class FireManagerController : MonoBehaviour
 
     public Text YouWin;
     public Image FireBar;
-	public Text instructions;
+    public Text instructions;
 
     // represents the health of the overall fire column
     // when the user gets through all the fires they win

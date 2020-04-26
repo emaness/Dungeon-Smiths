@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Snake : MonoBehaviour{
 	Vector2 dir = Vector2.right;
 	List<Transform> tail = new List<Transform>();
+	string butDir ;
 	bool ate = false;
 	bool isDied = false;
 	int tailLength = 2;
@@ -97,17 +98,38 @@ public class Snake : MonoBehaviour{
 				dir = -Vector2.right; // '-right' means 'left'
 			else if (Input.GetKey(KeyCode.UpArrow))
 				dir = Vector2.up;
-		}
-		    /*if (CrossPlatformInputManager.GetAxis("Horizontal") != 0){
+
+			/*if (Input.GetButtonDown("RightButton"))
+				dir = Vector2.right;
+			else if (Input.GetButtonDown("DownButton"))
+				dir = -Vector2.up;    // '-up' means 'down'
+			else if (Input.GetButtonDown("LeftButton"))
+				dir = -Vector2.right; // '-right' means 'left'
+			else if (Input.GetButtonDown("UpButton"))
+				dir = Vector2.up;*/
+			/*if (butDir == "up"){
+				dir = Vector2.up;
+				//Debug.Log(butDir);
+			}
+			else if (butDir == "down")
+				dir = -Vector2.up;
+			else if (butDir == "right")
+				dir = Vector2.right;
+			else if (butDir == "left")
+				dir = -Vector2.right;*/
+			//Debug.Log(butDir);
+		//}
+		    if (CrossPlatformInputManager.GetAxis("Horizontal") != 0){
 		    	dir = Vector2.right * CrossPlatformInputManager.GetAxis("Horizontal");
 		    }
 		    else if (CrossPlatformInputManager.GetAxis("Vertical") != 0){
 		    	dir = Vector2.up * CrossPlatformInputManager.GetAxis("Vertical");
 		    }
-	    }*/
+	    }
     }
     void Move(){
     	Vector2 v = transform.position;
+    	Debug.Log(dir.ToString());
 		transform.Translate(dir);
 		if (!isDied){
 			if (ate) {
@@ -188,5 +210,15 @@ public class Snake : MonoBehaviour{
 			// StartCoroutine("DoGameOver");
 
 		}
+	}
+	public void changeDir(string but){
+		if (but =="up")
+			dir = Vector2.up;
+		else if (but == "down")
+			dir = Vector2.down;
+		else if (but =="right")
+			dir = Vector2.right;
+		else if (but =="left")
+			dir = Vector2.left;
 	}
 }

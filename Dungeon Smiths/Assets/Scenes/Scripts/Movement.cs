@@ -12,7 +12,13 @@ public class Movement : MonoBehaviour
     private Rigidbody rigid;
 	public GameObject keyDoors;
 	private bool[] isFirstTime;
+
+	public int numKeys;
 	
+	public AudioSource audio;
+	public AudioClip footSteps;
+	public AudioClip keySound;
+	public AudioClip shakingSound;
 
     public bool isCollapsingLevel = false;
 
@@ -21,24 +27,22 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		isFirstTime = new bool[11];
+		isFirstTime = new bool[12];
 		for (int i = 0; i < isFirstTime.Length; i++) { isFirstTime[i] = true; }
 
 		rigid = GetComponent<Rigidbody>();
-
-        if(isCollapsingLevel)
-        {
-            StartCoroutine("CollapsingRoutine");
-        }
+		audio = GetComponent<AudioSource>();
     }
 
     IEnumerator CollapsingRoutine()
     {
-        yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(1.0f);
 
         var origPos = cam.transform.position;
 
-        for(var i = 0; i != 75; ++i)
+		audio.PlayOneShot(shakingSound);
+
+		for (var i = 0; i != 75; ++i)
         {
             cam.transform.position = new Vector3(
                 origPos.x + Random.Range(-0.4f, 0.4f),
@@ -47,9 +51,12 @@ public class Movement : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
         }
+
+		audio.Stop();
         cam.transform.position = origPos;
 
         enterMinigame("CaveIn");
+		yield return null;
     }
 
     // Update is called once per frame
@@ -61,11 +68,11 @@ public class Movement : MonoBehaviour
             transform.Translate(-moveStick.Horizontal * 0.2f, 0, -moveStick.Vertical * 0.2f);
             rigid.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
-            if (GetComponent<AudioSource>().isPlaying == false)
+            if (audio.isPlaying == false)
             {
-                GetComponent<AudioSource>().volume = Random.Range(0.6f, .8f);
-                GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.05f);
-                GetComponent<AudioSource>().Play();
+                audio.volume = Random.Range(0.6f, .8f);
+                audio.pitch = Random.Range(0.9f, 1.05f);
+                audio.PlayOneShot(footSteps);
             }
         }
         if (camStick.Horizontal != 0 || camStick.Vertical != 0)
@@ -82,6 +89,7 @@ public class Movement : MonoBehaviour
         camStick.Reset();
 
 		bool needInstruction = getFirstTime(sceneName);
+
 		int numberOfNeed = 0;
 		if (needInstruction) numberOfNeed = 1;
 		PlayerPrefs.SetInt("isFirstTime", numberOfNeed);
@@ -100,49 +108,78 @@ public class Movement : MonoBehaviour
     {
         string scene = null;
 
-        if(other.gameObject.CompareTag("FireObstacle"))
-        {
-            scene = "FireGame";
-        } else if(other.gameObject.CompareTag("TileMatchingCube"))
-        {
-            scene = "TileMatchingGame";
-        } else if(other.gameObject.CompareTag("Minecart"))
-        {
-            scene = "Minecart Game";  
-        } else if(other.gameObject.CompareTag("Skeleton"))
-        {
-            scene = "RockThrowing";
-        } else if(other.gameObject.CompareTag("Spider"))
-        {
-            scene = "spiderScene";
-        } else if(other.gameObject.CompareTag("EndLevel1Rock"))
-        {
-            scene = "CaveIn";
-        } else if(other.gameObject.CompareTag("Gorilla"))
-        {
-            scene = "FireDragon";
-        }else if (other.gameObject.CompareTag("KnightScene"))
-        {
-            scene = "KnightScene";
-        } else if(other.gameObject.CompareTag("Snake"))
-        {
-            scene = "Snake";
-        }else if (other.gameObject.CompareTag("Chest"))
+		if (other.gameObject.CompareTag("FireObstacle"))
+		{
+			scene = "FireGame";
+		}
+		else if (other.gameObject.CompareTag("TileMatchingCube"))
+		{
+			scene = "TileMatchingGame";
+		}
+		else if (other.gameObject.CompareTag("Minecart"))
+		{
+			scene = "Minecart Game";
+		}
+		else if (other.gameObject.CompareTag("Skeleton"))
+		{
+			scene = "RockThrowing";
+		}
+		else if (other.gameObject.CompareTag("Spider"))
+		{
+			scene = "spiderScene";
+		}
+		else if (other.gameObject.CompareTag("EndLevel1Rock"))
+		{
+			scene = "CaveIn";
+		}
+		else if (other.gameObject.CompareTag("Gorilla"))
+		{
+			scene = "FireDragon";
+		}
+		else if (other.gameObject.CompareTag("KnightScene"))
+		{
+			scene = "KnightScene";
+		}
+		else if (other.gameObject.CompareTag("Snake"))
+		{
+			scene = "Snake";
+		}
+		else if (other.gameObject.CompareTag("Chest"))
 		{
 			scene = "final2Scene";
-		}
+		} 
 		else if (other.gameObject.CompareTag("Rat"))
 		{
 			scene = "RatGame";
 		}
+		else if (other.gameObject.CompareTag("RockTroll"))
+		{
+			scene = "RockTroll";
+		}
+		else if (other.gameObject.CompareTag("ScorpionInsect"))
+		{
+			scene = "ScorpionInsect";
+		}
+        else if(other.gameObject.CompareTag("Level2Exit"))
+        {
+			scene = "JumpKing";
+        }
 
 		if (other.gameObject.CompareTag("KeyPart"))
         {
+
+			audio.PlayOneShot(keySound);
             int count = int.Parse(keyText.text.Substring(6, 1));
             ++count;
-            keyText.text = "Keys: " + count + "/5";
-            Destroy(other.gameObject);
-			if(count == 5)
+            keyText.text = "Keys: " + count + "/" + numKeys;
+
+			if (isCollapsingLevel && count == numKeys/2)
+			{
+				StartCoroutine("CollapsingRoutine");
+			}
+
+			Destroy(other.gameObject);
+			if(count == numKeys)
 			{
 				Destroy(keyDoors.gameObject);
 			}
@@ -158,7 +195,7 @@ public class Movement : MonoBehaviour
 
 	void setFirstTime(string scene)
 	{
-		if (scene.Equals("FireObstacle"))
+		if (scene.Equals("FireGame"))
 		{
 			isFirstTime[0] = false;
 		}
@@ -166,7 +203,7 @@ public class Movement : MonoBehaviour
 		{
 			isFirstTime[1] = false;
 		}
-		else if (scene.Equals("Minecart"))
+		else if (scene.Equals("RockTroll"))
 		{
 			isFirstTime[2] = false;
 		}
@@ -203,11 +240,15 @@ public class Movement : MonoBehaviour
 		{
 			isFirstTime[10] = false;
 		}
+		else if (scene.Equals("ScorpionInsect"))
+		{
+			isFirstTime[11] = false;
+		}
 	}
 
 	public bool getFirstTime(string scene)
 	{
-		if (scene.Equals("FireObstacle"))
+		if (scene.Equals("FireGame"))
 		{
 			return isFirstTime[0];
 		}
@@ -215,7 +256,7 @@ public class Movement : MonoBehaviour
 		{
 			return isFirstTime[1];
 		}
-		else if (scene.Equals("Minecart"))
+		else if (scene.Equals("RockTroll"))
 		{
 			return isFirstTime[2];
 		}
@@ -252,6 +293,10 @@ public class Movement : MonoBehaviour
 		{
 			return isFirstTime[10];
 		}
-		else return true;
+		else if (scene.Equals("ScorpionInsect"))
+		{
+			return isFirstTime[11];
+		}
+		else return false;
 	}
 }

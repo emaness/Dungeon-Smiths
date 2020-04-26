@@ -12,11 +12,17 @@ public class PlatformerMovement : MonoBehaviour
     private Animator anim;
     private bool inAir = false;
 
+    public AudioSource audio;
+    public AudioClip winAudio;
+    public AudioClip bounceAudio;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,11 +52,13 @@ public class PlatformerMovement : MonoBehaviour
             if (hit1.collider != null)
             {
                 checkBounce(1); //right
+                audio.PlayOneShot(bounceAudio);
                 inAir = false;
             }
             if (hit2.collider != null)
             {
                 checkBounce(2); //left
+                audio.PlayOneShot(bounceAudio);
                 inAir = false;
             }
         }
@@ -169,6 +177,7 @@ public class PlatformerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Finish"))
         {
+            audio.PlayOneShot(winAudio);
             SceneManager.LoadScene("Level 3");
         }
     }

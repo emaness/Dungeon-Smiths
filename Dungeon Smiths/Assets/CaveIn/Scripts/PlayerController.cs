@@ -76,7 +76,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(character);
             GameOver.gameObject.SetActive(true);
-            SceneManager.LoadScene("CaveIn");
+            SceneManager.UnloadSceneAsync("CaveIn").completed += e =>
+            {
+                SceneManager.LoadScene("CaveIn", LoadSceneMode.Additive);
+            };
+            // SceneManager.LoadScene("CaveIn");
             return;
             //Debug.Log(TimeElapsed);
         }
@@ -87,8 +91,21 @@ public class PlayerController : MonoBehaviour
 
             Win.gameObject.SetActive(true);
 
-            
-            SceneManager.LoadScene("Level 2");
+            if(SceneManager.GetSceneByName("Level 3") == null)
+            {
+                SceneManager.LoadScene("Level 2");
+            } else
+            {
+                SceneManager.UnloadSceneAsync("CaveIn");
+                Scene mt = SceneManager.GetActiveScene();
+                foreach (GameObject obj in mt.GetRootGameObjects())
+                {
+                    if (obj.name != "PauseMenu")
+                    {
+                        obj.SetActive(true);
+                    }
+                }
+            }
             
             // SceneManager.UnloadSceneAsync("Level1");
             // SceneManager.UnloadSceneAsync("CaveIn");

@@ -11,6 +11,8 @@ public class SkeletonController : MonoBehaviour
     private int walkingStateHash = Animator.StringToHash("Base Layer.Walking");
     private int deadStateHash = Animator.StringToHash("Base Layer.Dead");
 
+    public bool isRockTroll = false;
+
     public GameObject weakPointPrefab;
 
     public int InitialHealth;
@@ -24,7 +26,10 @@ public class SkeletonController : MonoBehaviour
 		if (PlayerPrefs.GetInt("isFirstTime") == 1)
 		{
 			print("entered isfirst time");
-			instructions.gameObject.SetActive(true);
+
+            if(instructions)
+			    instructions.gameObject.SetActive(true);
+
 			Time.timeScale = 0.0f;
 			float pauseEndTime = Time.realtimeSinceStartup + 4;
 			while (Time.realtimeSinceStartup < pauseEndTime)
@@ -32,7 +37,10 @@ public class SkeletonController : MonoBehaviour
 				yield return 0;
 			}
 			Time.timeScale = 1f;
-			instructions.gameObject.SetActive(false);
+
+            if(instructions)
+                instructions.gameObject.SetActive(false);
+
 			PlayerPrefs.SetInt("isFirstTime", 0);
 
 		}
@@ -79,7 +87,10 @@ public class SkeletonController : MonoBehaviour
         
         SetUpWeakpoints();
 		//PlayerPrefs.SetInt("isFirstTime", 1);
-		instructions.gameObject.SetActive(false);
+        if(instructions)
+        {
+            instructions.gameObject.SetActive(false);
+        }
 		StartCoroutine("IdleThenWalk");
     }
 

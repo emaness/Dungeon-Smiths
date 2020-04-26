@@ -32,6 +32,13 @@ TagManager:
   - blood
   - KeyPart
   - FxTemporaire
+  - Cut
+  - RockTroll
+  - ScorpionInsect
+  - Rat
+  - Chest
+  - jump
+  - Level2Exit
   layers:
   - Default
   - TransparentFX
