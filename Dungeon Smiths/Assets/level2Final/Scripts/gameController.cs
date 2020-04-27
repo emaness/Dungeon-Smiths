@@ -68,8 +68,11 @@ public class gameController : MonoBehaviour
 	private IEnumerator DoRestart()
 	{
 		yield return new WaitForSeconds(2.0f);
-		
-		SceneManager.LoadScene("final2Scene");
+
+		SceneManager.UnloadSceneAsync("final2Scene").completed += e =>
+		{
+		    SceneManager.LoadScene("final2Scene", LoadSceneMode.Additive);
+		};
 	}
 
 	private IEnumerator SetUpOne()
