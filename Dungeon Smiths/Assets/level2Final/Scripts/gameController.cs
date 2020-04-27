@@ -10,9 +10,9 @@ public class gameController : MonoBehaviour
 	[SerializeField] public Text YouWin;
 	[SerializeField] public Text TryAgain;
 	public Text instructions;
-	private int[] numbersOne = { 0, 1, 2, 3, };
-	private int[] numbersTwo = { 0, 1, 3, 2, 0 };
-	private int[] numbersThree = { 2, 4, 3, 1, 0, 3, 0};
+	private int[] numbersOne = { 0, 1, 2 };
+	private int[] numbersTwo = { 0, 1, 3, 2};
+	private int[] numbersThree = { 2, 4, 3, 1, 0};
 	private int counter;
 	private bool isOne;
 	private bool isTwo;
@@ -68,10 +68,8 @@ public class gameController : MonoBehaviour
 	private IEnumerator DoRestart()
 	{
 		yield return new WaitForSeconds(2.0f);
-		SceneManager.UnloadSceneAsync("final2Scene").completed += e =>
-		{
-			SceneManager.LoadScene("final2Scene", LoadSceneMode.Additive);
-		};
+		
+		SceneManager.LoadScene("final2Scene");
 	}
 
 	private IEnumerator SetUpOne()
@@ -129,7 +127,7 @@ public class gameController : MonoBehaviour
 
 
 		}
-		yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(4.0f);
 		//delete the sequence
 		for (int i = 0; i < numbersTwo.Length; i++)
 		{
@@ -160,7 +158,7 @@ public class gameController : MonoBehaviour
 
 
 		}
-		yield return new WaitForSeconds(7.0f);
+		yield return new WaitForSeconds(5.0f);
 		//delete the sequence
 		for (int i = 0; i < numbersThree.Length; i++)
 		{
