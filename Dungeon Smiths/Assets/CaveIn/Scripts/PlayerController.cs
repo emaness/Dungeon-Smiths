@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
             Win.gameObject.SetActive(true);
 
-            if(SceneManager.GetSceneByName("Level 3") == null)
+            if(!SceneManager.GetSceneByName("Level 3").IsValid())
             {
                 SceneManager.LoadScene("Level 2");
             } else
