@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5144f3b86b43d402f9b7fe4f533c3059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRockTroll: 0
   weakPointPrefab: {fileID: 8823572638324310251, guid: 0c43d9ad7fabb4f20957eefdc7455930,
     type: 3}
   InitialHealth: 5
@@ -2360,17 +2361,17 @@ PrefabInstance:
     - target: {fileID: 8823572638324310250, guid: 0c43d9ad7fabb4f20957eefdc7455930,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.075
+      value: -0.088
       objectReference: {fileID: 0}
     - target: {fileID: 8823572638324310250, guid: 0c43d9ad7fabb4f20957eefdc7455930,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.003
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: 8823572638324310250, guid: 0c43d9ad7fabb4f20957eefdc7455930,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.037
+      value: -0.038
       objectReference: {fileID: 0}
     - target: {fileID: 8823572638324310250, guid: 0c43d9ad7fabb4f20957eefdc7455930,
         type: 3}
