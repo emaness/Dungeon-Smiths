@@ -46,6 +46,7 @@ TagManager:
   - WaterAttack
   - ExplosionAttack
   - laser
+  - Level3Exit
   layers:
   - Default
   - TransparentFX

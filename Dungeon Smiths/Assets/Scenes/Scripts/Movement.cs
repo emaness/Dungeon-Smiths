@@ -164,6 +164,9 @@ public class Movement : MonoBehaviour
         else if(other.gameObject.CompareTag("Level2Exit"))
         {
 			scene = "JumpKing";
+        } else if(other.gameObject.CompareTag("Level3Exit"))
+        {
+			scene = "Ending";
         }
 
 		if (other.gameObject.CompareTag("KeyPart"))

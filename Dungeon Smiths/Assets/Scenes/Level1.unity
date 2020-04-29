@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465996, g: 0.49643868, b: 0.57482874, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659948, g: 0.4964382, b: 0.574829, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8357,6 +8357,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveStick: {fileID: 868623641}
   camStick: {fileID: 334396890}
+  play: {fileID: 0}
+  levels: {fileID: 0}
+  exit: {fileID: 0}
+  level1: {fileID: 0}
+  level2: {fileID: 0}
+  level3: {fileID: 0}
+  back: {fileID: 0}
 --- !u!4 &1551082342
 Transform:
   m_ObjectHideFlags: 0
@@ -10684,7 +10691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108622809}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -76.07, y: -630.285, z: -760.2}
+  m_LocalPosition: {x: 35.04, y: -630.285, z: -739.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1819864115}
