@@ -77,6 +77,9 @@ public class gameController : MonoBehaviour
 
 	private IEnumerator SetUpOne()
 	{
+		var prevActive = SceneManager.GetActiveScene();
+		SceneManager.SetActiveScene(SceneManager.GetSceneByName("final2Scene"));
+
 		GameObject[] objects = new GameObject[numbersOne.Length]; 
 		//create the sequence
 		for(int i = 0; i < numbersOne.Length; i++)
@@ -98,6 +101,7 @@ public class gameController : MonoBehaviour
 			//print(numbersOne[i]);
 
 		}
+		SceneManager.SetActiveScene(prevActive);
 		yield return new WaitForSeconds(3.0f);
 		//delete the sequence
 		for(int i = 0; i < numbersOne.Length; i++)
@@ -110,6 +114,8 @@ public class gameController : MonoBehaviour
 
 	private IEnumerator SetUpTwo()
 	{
+		var prevActive = SceneManager.GetActiveScene();
+		SceneManager.SetActiveScene(SceneManager.GetSceneByName("final2Scene"));
 		GameObject[] objects = new GameObject[numbersTwo.Length];
 		//create the sequence
 		for (int i = 0; i < numbersTwo.Length; i++)
@@ -130,6 +136,7 @@ public class gameController : MonoBehaviour
 
 
 		}
+		SceneManager.SetActiveScene(prevActive);
 		yield return new WaitForSeconds(4.0f);
 		//delete the sequence
 		for (int i = 0; i < numbersTwo.Length; i++)
@@ -141,6 +148,8 @@ public class gameController : MonoBehaviour
 
 	private IEnumerator SetUpThree()
 	{
+		var prevActive = SceneManager.GetActiveScene();
+		SceneManager.SetActiveScene(SceneManager.GetSceneByName("final2Scene"));
 		GameObject[] objects = new GameObject[numbersThree.Length];
 		//create the sequence
 		for (int i = 0; i < numbersThree.Length; i++)
@@ -161,6 +170,7 @@ public class gameController : MonoBehaviour
 
 
 		}
+		SceneManager.SetActiveScene(prevActive);
 		yield return new WaitForSeconds(5.0f);
 		//delete the sequence
 		for (int i = 0; i < numbersThree.Length; i++)
