@@ -14,6 +14,10 @@ public class MenuManager : MonoBehaviour
     public GameObject level2;
     public GameObject level3;
     public GameObject back;
+    public GameObject minecart;
+    public GameObject ratgame;
+    public GameObject jumpking;
+    public GameObject cuphead;
 
     public void sceneChange(string scene)
     {
@@ -61,6 +65,10 @@ public class MenuManager : MonoBehaviour
         level2.SetActive(true);
         level3.SetActive(true);
         back.SetActive(true);
+        minecart.SetActive(true);
+        ratgame.SetActive(true);
+        jumpking.SetActive(true);
+        cuphead.SetActive(true);
     }
 
     public void backButton()
@@ -72,5 +80,9 @@ public class MenuManager : MonoBehaviour
         level2.SetActive(false);
         level3.SetActive(false);
         back.SetActive(false);
+        minecart.SetActive(false);
+        ratgame.SetActive(false);
+        jumpking.SetActive(false);
+        cuphead.SetActive(false);
     }
 }
